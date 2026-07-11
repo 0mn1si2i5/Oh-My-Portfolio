@@ -8,22 +8,22 @@ const groups = [
   {
     number: '01',
     label: { en: 'Resolve a link', zh: '把链接变成可用歌曲' },
-    title: { en: 'Paste once, then get the song and the links you need.', zh: '粘贴一次，拿到歌曲信息和可用链接。' },
+    title: { en: 'Copy the link from a music service, then paste it here.', zh: '在音乐平台点“复制链接”后，直接粘贴到这里。' },
     copy: {
-      en: 'A shared link or its full share message becomes a track page with the source and available listening destinations.',
-      zh: '无论是一条音乐链接，还是完整的分享文案，解析后都会得到歌曲信息、原始来源和可用的全平台链接。',
+      en: 'Side B parses the song information and returns the available platform links.',
+      zh: 'Side B 会解析歌曲信息，并返回可用的全平台链接。',
     },
     screens: [
       {
         file: '01-parse-link',
-        title: { en: 'Paste a share message', zh: '粘贴分享文案' },
-        copy: { en: 'The song page accepts supported music links and full NetEase share messages.', zh: '歌曲页可以直接接收支持的平台链接，也可以粘贴完整的网易云分享文案。' },
-        alt: { en: 'A NetEase Cloud Music share message pasted into Side B on an iPhone.', zh: '一段网易云音乐分享文案被粘贴到 iPhone 上的 Side B 歌曲页。' },
+        title: { en: 'Copy a link, then paste it', zh: '复制链接，直接粘贴' },
+        copy: { en: 'Copy a link from Spotify, Apple Music, NetEase Cloud Music, or QQ Music, then paste it directly into Side B.', zh: '在 Spotify、Apple Music、网易云音乐或 QQ 音乐点“复制链接”后，直接粘贴到 Side B。' },
+        alt: { en: 'A copied NetEase Cloud Music link pasted into Side B on an iPhone.', zh: '一条复制自网易云音乐的链接被粘贴到 iPhone 上的 Side B 歌曲页。' },
       },
       {
         file: '02-platform-links',
-        title: { en: 'Open the available services', zh: '查看可用平台链接' },
-        copy: { en: 'The resolved track page keeps the artwork, source, and available service links together.', zh: '解析后的歌曲页把封面、来源和可用的平台链接放在一起。' },
+        title: { en: 'Open the right music app', zh: '跳转到对应的音乐 App' },
+        copy: { en: 'The track page keeps the artwork, source, and available links together. Tap a button to open the matching music app.', zh: '歌曲页把封面、来源和可用的平台链接放在一起；点击按钮即可跳转到对应的音乐 App。' },
         alt: { en: 'The resolved Creep song page in Side B, showing its original source and four music-service buttons.', zh: 'Side B 中解析后的《Creep》歌曲页，展示原始来源和四个音乐平台按钮。' },
       },
     ],
