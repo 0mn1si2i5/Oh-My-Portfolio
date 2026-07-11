@@ -33,7 +33,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="monogram" href={base} aria-label={`${site.name}, home`}>{site.shortName}</a>
+      <a class="monogram" href={base} aria-label={`${site.name}, home`}>{site.name}</a>
       <nav aria-label="Primary navigation">
         <a href={`${base}#work`}>Work</a>
         <a href={`${base}#about`}>About</a>
@@ -79,7 +79,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .skip-link:focus { top: 1rem; }
   .site-header, .site-footer { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; display: flex; align-items: center; }
   .site-header { min-height: 84px; justify-content: space-between; border-bottom: 1px solid var(--line); }
-  .monogram { font-weight: 730; letter-spacing: -0.08em; text-decoration: none; }
+  .monogram { font-size: .94rem; font-weight: 680; letter-spacing: -.045em; text-decoration: none; }
   nav { display: flex; gap: 1.25rem; margin-left: auto; margin-right: 1.25rem; }
   nav a, .theme-toggle, .site-footer { font-size: .84rem; font-weight: 560; }
   nav a { text-decoration: none; color: var(--muted); }

@@ -12,7 +12,7 @@ const projects = defineCollection({
     role: z.string(),
     accent: z.enum(['violet', 'coral', 'blue']),
     media: z.object({
-      type: z.enum(['video', 'placeholder']),
+      type: z.enum(['video', 'image', 'placeholder']),
       src: z.string().optional(),
       poster: z.string().optional(),
       alt: z.string(),

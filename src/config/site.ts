@@ -1,6 +1,5 @@
 export const site = {
   name: 'Jiaming Li',
-  shortName: 'JL',
   description: 'Explorations in AI, tools, interaction, and culture by Jiaming Li.',
   github: 'https://github.com/0mn1si2i5',
   links: {

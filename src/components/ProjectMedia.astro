@@ -19,6 +19,10 @@ const asset = (path?: string) => path ? `${base}${path.replace(/^\//, '')}` : un
       </video>
     )}
   </div>
+) : media.type === 'image' && media.src ? (
+  <div class:list={['project-media', `accent-${accent}`, { compact }]}>
+    <img src={asset(media.src)} alt={media.alt} loading={compact ? 'lazy' : 'eager'} />
+  </div>
 ) : (
   <div class:list={['project-media', 'media-placeholder', `accent-${accent}`, { compact }]} role="img" aria-label={media.alt}>
     <div class="placeholder-line short"></div>
