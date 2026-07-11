@@ -25,7 +25,7 @@ Your friend listens on NetEase; you use Spotify. Most of the time, sharing becom
 
 ## How Side B handles it
 
-Side B parses Spotify, Apple Music, NetEase Cloud Music, and QQ Music links, groups them around one track, and retrieves the available platform links. From there, people can save it, share it, open it in a preferred service, or continue the conversation in a room.
+Side B parses Spotify, Apple Music, NetEase Cloud Music, and QQ Music links, then returns the song information and available platform links. From there, people can save it, share it, open it in a preferred service, or continue the conversation in a room.
 
 ## What I built
 
@@ -47,11 +47,11 @@ Side B also raises a harder product question: will people install another app ju
 
 ## Side B 怎么处理这件事
 
-Side B 可以解析 Spotify、Apple Music、网易云音乐和 QQ 音乐的歌曲链接，将它们归到同一首歌，并返回可用的全平台链接。解析完成后，用户可以收藏、分享、跳转到常用平台，或在聊天室里继续讨论。
+Side B 可以解析 Spotify、Apple Music、网易云音乐和 QQ 音乐的歌曲链接，返回歌曲信息和可用的全平台链接。解析完成后，用户可以收藏、分享、跳转到常用平台，或在聊天室里继续讨论。
 
 ## 我做了什么
 
-我把“解析 — 汇集 — 分享”的核心流程做成了 SwiftUI iOS 原型，后端由 FastAPI 支撑。App 会在本地保留最近解析和个人歌单，支持跳转到常用平台；房间里则把歌曲卡片、回复和表情回应放在同一处。
+我把“解析 — 获取链接 — 分享”的核心流程做成了 SwiftUI iOS 原型，后端由 FastAPI 支撑。App 会在本地保留最近解析和个人歌单，支持跳转到常用平台；房间里则把歌曲卡片、回复和表情回应放在同一处。
 
 上面的图片展示的是实际解析结果和一个本地策展的听歌房间：既可以为自己解析一条链接，也可以直接在分享它的对话里完成解析。
 
