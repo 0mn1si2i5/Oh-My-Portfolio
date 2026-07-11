@@ -12,15 +12,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <BaseLayout>
   <section class="hero page-width">
     <p class="eyebrow">Jiaming Li · 李佳鸣</p>
-    <h1><Localized en="I make tools for thinking, exploring, and connecting." zh="我做让思考、探索与连接自然发生的工具。" /></h1>
+    <h1><Localized en="I make tools for thinking, exploring, and connecting." zh="我设计并开发 AI 与交互产品。" /></h1>
     <div class="hero-bottom">
-      <p><Localized en="I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable." zh="我是产品构建者，也做研究。我关心人怎样和 AI 一起工作、怎样读懂信息，又怎样把一个小小的好奇心做成能被分享的东西。" /></p>
+      <p><Localized en="I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable." zh="我关注人们如何使用 AI、理解复杂信息，以及如何将一个想法转化为可用、可分享的产品。" /></p>
       <a class="quiet-link" href="#work"><Localized en="Selected explorations" zh="精选探索" /> <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
-    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="这些问题，我一直在追。" /></h2></div>
+    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="持续推进的项目。" /></h2></div>
     <div class="project-list">
       {projects.map((project) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
             <div class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.status} /></span></div>
             <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
             <p><Localized {...project.data.summary} /></p>
-            <a class="project-link" href={`${base}projects/${project.id}`}><Localized en="Read the exploration" zh="阅读这项探索" /> <span aria-hidden="true">→</span></a>
+            <a class="project-link" href={`${base}projects/${project.id}`}><Localized en="Read the exploration" zh="查看项目详情" /> <span aria-hidden="true">→</span></a>
           </div>
         </article>
       ))}
@@ -38,15 +38,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
   <section class="other-section page-width" aria-labelledby="other-title">
     <p class="eyebrow"><Localized en="Other work" zh="其他作品" /></p>
-    <div class="other-grid"><h2 id="other-title"><Localized en="Small things with a longer life." zh="小事，也能活得很久。" /></h2><article class="other-card"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="一个为《群星》做的中文命名增强模组，想让这片宇宙用中文说话时，也听起来像它本来就属于这里。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></article></div>
+    <div class="other-grid"><h2 id="other-title"><Localized en="Small things with a longer life." zh="同样值得记录的项目。" /></h2><article class="other-card"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="为《群星》提供更符合中文语境的舰船、星球与人物默认名称，改善中文玩家的沉浸体验。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></article></div>
   </section>
 
   <section id="about" class="about-section page-width" aria-labelledby="about-title">
-    <div><p class="eyebrow"><Localized en="About" zh="关于" /></p><h2 id="about-title"><Localized en="A practice of making things clear." zh="把复杂的事讲清楚，也做出来。" /></h2></div>
+    <div><p class="eyebrow"><Localized en="About" zh="关于" /></p><h2 id="about-title"><Localized en="A practice of making things clear." zh="研究、产品与实现。" /></h2></div>
     <div class="about-copy">
-      <p><Localized en="I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes." zh="我在新加坡国立大学读计算机科学，也在 AI4SG Lab 做人机协作研究。研究问题、产品判断和能跑起来的原型，对我来说是同一件事的不同侧面。" /></p>
-      <p><Localized en="I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious." zh="我喜欢从那些有一点不对劲、却常被忽略的地方开始：回不去的一段对话，失去上下文的音乐链接，或一个需要更好名字的小世界。接着，我试着把下一步做得不言自明。" /></p>
-      <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="Find more on GitHub" zh="在 GitHub 发现更多" /> <span aria-hidden="true">↗</span></a>
+      <p><Localized en="I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes." zh="我目前在新加坡国立大学计算机系攻读硕士，师从 Yi-Chieh Lee 教授，并在校内 AI4SG Lab 开展人机协作研究。我的工作覆盖研究设计、产品决策与原型实现。" /></p>
+      <p><Localized en="I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious." zh="我通常从具体的问题出发：难以回溯的对话、失去上下文的音乐链接，或不符合中文语境的游戏命名。随后通过产品设计和工程实现，把问题转化为可验证的解决方案。" /></p>
+      <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="Find more on GitHub" zh="在 GitHub 查看更多" /> <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </BaseLayout>

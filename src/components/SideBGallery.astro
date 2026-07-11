@@ -4,21 +4,21 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
 const screens = [
-  { file: '01-songs-home-light', caption: { en: 'Recent resolutions and a personal collection keep the next listening choice close.', zh: '最近认出的歌和个人收藏，替下一次播放留住线索。' } },
-  { file: '02-paste-netease-copy', caption: { en: 'A natural-language share message can be pasted as-is; the link does not need to arrive clean.', zh: '分享消息可以原样粘进来；链接不必规规矩矩地出现。' } },
-  { file: '03-song-detail-creep-light', caption: { en: 'One canonical song view makes the available listening destinations legible.', zh: '同一张歌曲卡，把能去哪里听讲得明明白白。' } },
-  { file: '04-song-detail-reset-dark', caption: { en: 'Artwork-led detail views hold up across light and dark appearances.', zh: '以封面为主的详情页，在浅色和深色里都站得住。' } },
-  { file: '05-rooms-list', caption: { en: 'Rooms give recommendations a small, persistent social context.', zh: '房间给一条推荐留下一个小而持续的社交场景。' } },
-  { file: '06-room-chat-hero', caption: { en: 'Song cards, replies, and reactions remain together in the conversation.', zh: '歌曲卡片、回复和反应，一直待在同一段对话里。' } },
-  { file: '07-send-to-room-sheet', caption: { en: 'Sending a song is a direct continuation of resolving it.', zh: '识别到一首歌后，顺手把它发进房间。' } },
-  { file: '08-profile-settings', caption: { en: 'Profile, preferred platform, and appearance settings stay deliberately lightweight.', zh: '个人资料、偏好平台和外观设置，都不喧宾夺主。' } },
+  { file: '01-songs-home-light', caption: { en: 'Recent resolutions and a personal collection keep the next listening choice close.', zh: '近期识别记录和个人收藏便于继续收听。' } },
+  { file: '02-paste-netease-copy', caption: { en: 'A natural-language share message can be pasted as-is; the link does not need to arrive clean.', zh: '支持直接粘贴自然语言分享消息，无需预先整理链接。' } },
+  { file: '03-song-detail-creep-light', caption: { en: 'One canonical song view makes the available listening destinations legible.', zh: '统一的歌曲详情页展示可用的播放平台。' } },
+  { file: '04-song-detail-reset-dark', caption: { en: 'Artwork-led detail views hold up across light and dark appearances.', zh: '详情页适配浅色和深色外观。' } },
+  { file: '05-rooms-list', caption: { en: 'Rooms give recommendations a small, persistent social context.', zh: '房间为音乐推荐提供持续的讨论空间。' } },
+  { file: '06-room-chat-hero', caption: { en: 'Song cards, replies, and reactions remain together in the conversation.', zh: '歌曲卡片、回复和反应集中在同一讨论中。' } },
+  { file: '07-send-to-room-sheet', caption: { en: 'Sending a song is a direct continuation of resolving it.', zh: '歌曲识别完成后，可直接发送至房间。' } },
+  { file: '08-profile-settings', caption: { en: 'Profile, preferred platform, and appearance settings stay deliberately lightweight.', zh: '个人资料、偏好平台与外观设置保持简洁。' } },
 ];
 ---
 
 <section class="side-b-gallery" aria-labelledby="side-b-gallery-title">
   <div class="gallery-intro">
     <p class="eyebrow"><Localized en="In practice" zh="实际体验" /></p>
-    <h2 id="side-b-gallery-title"><Localized en="From a shared link to a shared room." zh="从一条链接，走进同一个房间。" /></h2>
+    <h2 id="side-b-gallery-title"><Localized en="From a shared link to a shared room." zh="从音乐链接到共同讨论。" /></h2>
   </div>
   <div class="screens">
     {screens.map((screen) => (

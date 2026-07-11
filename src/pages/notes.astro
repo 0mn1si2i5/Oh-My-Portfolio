@@ -7,9 +7,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <BaseLayout title="Notes" description="Future notes by Jiaming Li.">
   <section class="notes page-width">
     <p class="eyebrow"><Localized en="Notes" zh="随笔" /></p>
-    <h1><Localized en="Room for things not finished yet." zh="给还没想完的事，留个位置。" /></h1>
-    <p class="lead"><Localized en="This is where I will leave short notes on making, research, and the questions that survive after a project ships." zh="这里会放一些短记：关于做东西、做研究，也关于项目上线后依然萦绕不去的问题。" /></p>
-    <div class="empty-state"><span aria-hidden="true">◌</span><p><Localized en="No notes published yet." zh="暂时还没有随笔。" /></p><p class="muted"><Localized en="For now, the projects are the notes." zh="眼下，项目本身就是最好的注脚。" /></p><a href={`${base}#work`}><Localized en="Return to selected work" zh="回到精选项目" /> <span aria-hidden="true">↑</span></a></div>
+    <h1><Localized en="Room for things not finished yet." zh="记录尚未结束的问题。" /></h1>
+    <p class="lead"><Localized en="This is where I will leave short notes on making, research, and the questions that survive after a project ships." zh="这里将发布关于产品开发、研究过程及相关思考的短文。" /></p>
+    <div class="empty-state"><span aria-hidden="true">◌</span><p><Localized en="No notes published yet." zh="暂未发布文章。" /></p><p class="muted"><Localized en="For now, the projects are the notes." zh="目前可以先从项目页了解我的工作。" /></p><a href={`${base}#work`}><Localized en="Return to selected work" zh="返回精选项目" /> <span aria-hidden="true">↑</span></a></div>
   </section>
 </BaseLayout>
 
