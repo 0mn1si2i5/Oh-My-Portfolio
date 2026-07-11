@@ -15,6 +15,7 @@ const projects = defineCollection({
       type: z.enum(['video', 'image', 'placeholder']),
       src: z.string().optional(),
       poster: z.string().optional(),
+      walkthrough: z.object({ src: z.string(), poster: z.string().optional() }).optional(),
       alt: z.string(),
     }),
     links: z.array(z.object({ label: z.string(), href: z.string().url() })),

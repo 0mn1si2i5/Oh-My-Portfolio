@@ -20,7 +20,7 @@ const asset = (path?: string) => path ? `${base}${path.replace(/^\//, '')}` : un
     )}
   </div>
 ) : media.type === 'image' && media.src ? (
-  <div class:list={['project-media', `accent-${accent}`, { compact }]}>
+  <div class:list={['project-media', 'image-media', `accent-${accent}`, { compact }]}>
     <img src={asset(media.src)} alt={media.alt} loading={compact ? 'lazy' : 'eager'} />
   </div>
 ) : (
@@ -35,6 +35,7 @@ const asset = (path?: string) => path ? `${base}${path.replace(/^\//, '')}` : un
 <style>
   .project-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
   video, img { display: block; width: 100%; height: 100%; object-fit: cover; background: #111; }
+  .image-media img { object-fit: contain; background: var(--surface); }
   .media-placeholder { padding: clamp(1.2rem, 3vw, 2rem); display: flex; flex-direction: column; justify-content: flex-end; gap: .7rem; }
   .media-placeholder::before { content: ''; position: absolute; inset: 11% 15%; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 12px; transform: rotate(-5deg); }
   .placeholder-line { position: relative; z-index: 1; height: 9px; width: 52%; border-radius: 999px; background: color-mix(in srgb, var(--accent) 35%, var(--surface)); }
