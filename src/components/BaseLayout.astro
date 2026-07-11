@@ -36,7 +36,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       })();
     </script>
   </head>
-  <body>
+  <body id="top">
     <a class="skip-link" href="#main"><Localized en="Skip to content" zh="跳至主要内容" /></a>
     <header class="site-header">
       <a class="monogram" href={base} aria-label={`${site.name}, home`}>{site.name}</a>
@@ -57,6 +57,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <span>© {new Date().getFullYear()} {site.name}</span>
       <a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
     </footer>
+    <a class="back-to-top" href="#top"><Localized en="Back to top" zh="返回顶部" /> <span aria-hidden="true">↑</span></a>
     <script>
       const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
       const localeButton = document.querySelector<HTMLButtonElement>('.locale-toggle');
@@ -118,6 +119,8 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   nav a:hover { color: var(--ink); }
   .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; padding: .45rem .62rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
   .site-footer { justify-content: space-between; min-height: 94px; color: var(--muted); border-top: 1px solid var(--line); }
-  @media (max-width: 560px) { .site-header, .site-footer { width: min(100% - 2rem, 1180px); } nav { gap: .85rem; margin-right: .75rem; } .theme-label { display: none; } .locale-toggle, .theme-toggle { padding: .42rem .5rem; } }
+  .back-to-top { position: fixed; right: max(1rem, calc((100vw - 1180px) / 2)); bottom: 1rem; z-index: 4; padding: .55rem .75rem; color: var(--ink); background: color-mix(in srgb, var(--paper) 88%, transparent); border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 4px 18px rgb(0 0 0 / .08); font-size: .78rem; font-weight: 650; text-decoration: none; backdrop-filter: blur(8px); }
+  .back-to-top:hover { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+  @media (max-width: 560px) { .site-header, .site-footer { width: min(100% - 2rem, 1180px); } nav { gap: .85rem; margin-right: .75rem; } .theme-label { display: none; } .locale-toggle, .theme-toggle { padding: .42rem .5rem; } .back-to-top { right: 1rem; bottom: 1rem; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 </style>
