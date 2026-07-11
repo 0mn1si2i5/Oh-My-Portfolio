@@ -1,9 +1,9 @@
 ---
 title: { en: Side B, zh: Side B }
 year: { en: '2026', zh: '2026' }
-status: { en: Working iOS prototype, zh: 可运行的 iOS 原型 }
+status: { en: Working iOS prototype, zh: 仍在生长的 iOS 原型 }
 order: 2
-summary: { en: A cross-platform music-sharing prototype that resolves a song once, then makes it easy to save, route, and discuss together., zh: 一个跨平台音乐分享原型：只需识别一次歌曲，即可轻松收藏、跳转与一起讨论。 }
+summary: { en: A cross-platform music-sharing prototype that resolves a song once, then makes it easy to save, route, and discuss together., zh: 一个跨平台音乐分享原型：歌只认一次，之后就能收藏、跳转，也能和朋友继续聊。 }
 role: { en: Product concept, interaction design, SwiftUI, and service prototyping, zh: 产品概念、交互设计、SwiftUI 与服务原型开发 }
 accent: coral
 media:
@@ -46,21 +46,21 @@ The project remains a prototype, but building the working path made the cost of 
 
 ## 我注意到的问题
 
-分享一首歌本该是一个很小的社交动作，但链接常常会把对方带到错误的平台、抹掉有用的语境，或让一条推荐走向无处可去的终点。
+分享一首歌本该是很小、很轻的一件事。可一个链接常会把对方带去错误的平台，弄丢原本的语境，最后让一句“你听听这个”落在没有出口的地方。
 
 ## 我探索的方向
 
-我在探索一种不受平台限制的分享体验：链接先理解这首歌，再在不同的听歌习惯之间保留推荐本来的节奏。
+我想试着做一种不被平台卡住的分享体验：链接先弄懂这首歌，再跨过每个人不同的听歌习惯，把推荐刚刚开始时的那股劲保留下来。
 
 ## 我做出的东西
 
-我将核心的“解析 — 汇集 — 分享”流程设计并实现为一个 SwiftUI iOS 原型，后端由 FastAPI 服务支持。系统把 Spotify、Apple Music、网易云音乐与 QQ 音乐的输入解析为统一的歌曲对象，并支持本地收藏、平台跳转，以及拥有持久消息和实时更新的房间讨论。
+我把核心的“解析 — 汇集 — 分享”做成了一个 SwiftUI iOS 原型，后端由 FastAPI 服务支撑。系统会把 Spotify、Apple Music、网易云音乐和 QQ 音乐的输入识别成同一个歌曲对象，再支持本地收藏、平台跳转，以及带有持久消息和实时更新的房间讨论。
 
-这里的屏幕来自真实的解析结果与一个精心设置的本地听歌房间：歌曲详情页让可用去向一目了然，房间则让歌曲卡片、回复与反应保留在同一个社交语境中。
+这里展示的是实际解析出的歌曲，以及一个精心布置的本地听歌房间：详情页把可以去哪里听说清楚；房间则让歌曲卡片、回复和反应留在同一个社交语境里。
 
 ## 我学到的事
 
-项目仍是原型，但走完可运行的路径后，我具体感受到一次错误匹配的代价。平台按钮只有在系统先赢得用户对它所指向歌曲的信任时才真正有用。因此，这成为核心约束：有真实去向时就展示它；不确定时保持可见，而不把猜测包装成成功。
+项目仍是原型，但把整条路径跑通之后，一次错误匹配的代价变得非常具体。平台按钮只有在系统先让人相信“它指的就是这首歌”时才有意义。所以这成了最重要的约束：有真实去向，就把它摆出来；不确定，也要让不确定留在台面上，别把猜测伪装成成功。
 
 </section>
 
