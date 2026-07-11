@@ -7,21 +7,20 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const stages = [
   {
     number: '01',
-    label: { en: 'Receive', zh: '收到一条分享' },
-    title: { en: 'Paste what you were sent.', zh: '收到什么，就贴什么。' },
+    label: { en: 'Parse', zh: '解析链接' },
+    title: { en: 'Start with a music link.', zh: '输入一个音乐链接。' },
     copy: {
-      en: 'A recommendation may arrive as a short link inside a full message. It can be pasted on the songs page, or directly into a room without leaving the conversation.',
-      zh: '朋友发来的不一定是一个干净链接，可能还带着一句话、歌名和短链。它既可以贴到歌曲页，也可以直接贴进房间，不用先跳出聊天。',
+      en: 'Paste a Spotify, Apple Music, NetEase Cloud Music, or QQ Music link. A full share message works too; Side B extracts the link before it starts resolving the song.',
+      zh: '可以粘贴 Spotify、Apple Music、网易云音乐或 QQ 音乐链接；带着歌名和短链的完整分享消息也可以直接使用。Side B 会先提取链接，再开始解析歌曲。',
     },
     screens: [
       { file: '01-personal-paste', alt: { en: 'A natural-language NetEase share message pasted into Side B songs.', zh: '一段包含网易云短链的分享消息被粘贴到 Side B 的歌曲页。' } },
-      { file: '04-room-paste-link', alt: { en: 'The same music share pasted into the Late Night Loop room composer.', zh: '同一段音乐分享被粘贴到 Late Night Loop 房间的输入框。' } },
     ],
   },
   {
     number: '02',
-    label: { en: 'Identify', zh: '确认是哪一首歌' },
-    title: { en: 'Turn a link into a track you can check.', zh: '先把链接变成一首能确认的歌。' },
+    label: { en: 'Resolve', zh: '获取歌曲与链接' },
+    title: { en: 'Get the track and its platform links.', zh: '获取歌曲信息和全平台链接。' },
     copy: {
       en: 'Side B resolves the incoming link into one track page: title, artist, artwork, original source, and the available listening destinations are all in one place.',
       zh: 'Side B 会把传来的链接收敛成同一张歌曲页：歌名、歌手、封面、原始来源和可用去向都放在一起。这样在跳转之前，先确认大家说的是不是同一首歌。',
@@ -32,15 +31,14 @@ const stages = [
   },
   {
     number: '03',
-    label: { en: 'Keep the context', zh: '把语境留下来' },
-    title: { en: 'Save it for yourself, or leave it in the room.', zh: '可以自己留着，也可以留在对话里。' },
+    label: { en: 'Continue', zh: '继续下一步' },
+    title: { en: 'Choose what to do with the result.', zh: '解析完成后，决定怎么继续。' },
     copy: {
-      en: 'A resolved track can stay in recent activity and Favorites. In a room, it becomes a song card that people can quote, reply to, and react to without losing the reason it was shared.',
-      zh: '解析后的歌会留在最近解析和收藏里；放进房间后，它会变成可引用、可回复、可表情回应的歌曲卡片。推荐它的理由，也就不会跟着原始链接一起丢掉。',
+      en: 'From the song page, people can save a track, open any available platform link, or send it to a room. Once it is in a room, later replies and reactions stay attached to the song card.',
+      zh: '从歌曲页可以收藏歌曲、打开任意可用的平台链接，或把它发送到房间。发送到房间后，后续回复和表情回应会继续挂在歌曲卡片上。',
     },
     screens: [
-      { file: '03-personal-library', alt: { en: 'Recent resolutions and Favorites in Side B.', zh: 'Side B 中的最近解析与已收藏歌单。' } },
-      { file: '06-room-reply-reactions', alt: { en: 'A Side B room where a shared song has a quoted reply and emoji reactions.', zh: 'Side B 房间中，一首分享的歌带有引用回复和表情回应。' } },
+      { file: '07-send-to-room-sheet', alt: { en: 'The Side B sheet for choosing a room to send a resolved song to.', zh: 'Side B 中为解析后的歌曲选择发送房间的操作层。' } },
     ],
   },
 ];
@@ -49,7 +47,7 @@ const stages = [
 <section class="side-b-gallery" aria-labelledby="side-b-gallery-title">
   <header class="gallery-intro">
     <p class="eyebrow"><Localized en="How it works" zh="实际使用" /></p>
-    <h2 id="side-b-gallery-title"><Localized en="Identify the song first, then decide what happens next." zh="先认出这首歌，再决定接下来做什么。" /></h2>
+    <h2 id="side-b-gallery-title"><Localized en="Parse the link, get the platform links, then decide what to do next." zh="解析链接，获取全平台链接，再决定怎么继续。" /></h2>
   </header>
 
   <div class="stages">
@@ -60,7 +58,7 @@ const stages = [
           <h3><Localized {...stage.title} /></h3>
           <p><Localized {...stage.copy} /></p>
         </div>
-        <div class:list={['stage-screens', { pair: stage.screens.length > 1 }]}>
+        <div class="stage-screens">
           {stage.screens.map((screen) => (
             <figure>
               <img
@@ -92,7 +90,6 @@ const stages = [
   .stage-copy h3 { margin: .75rem 0 1rem; font-size: clamp(1.35rem, 2.3vw, 2rem); line-height: 1.08; letter-spacing: -.045em; }
   .stage-copy > p:last-child { margin: 0; font-size: 1.02rem; line-height: 1.65; }
   .stage-screens { width: min(100%, 270px); justify-self: end; }
-  .stage-screens.pair { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
   figure { margin: 0; padding: 6px; background: #131316; border-radius: 26px; box-shadow: 0 17px 35px rgba(20, 20, 30, .16); }
   img { display: block; width: 100%; border-radius: 20px; }
   @media (max-width: 680px) {
@@ -101,7 +98,6 @@ const stages = [
     .stages { gap: 4.5rem; }
     .stage, .stage.reversed { grid-template-columns: 1fr; gap: 1.8rem; }
     .stage.reversed .stage-copy, .stage.reversed .stage-screens { order: initial; }
-    .stage-screens, .stage-screens.pair { width: min(100%, 280px); justify-self: start; }
-    .stage-screens.pair { grid-template-columns: 1fr; gap: 1.25rem; }
+    .stage-screens { width: min(100%, 280px); justify-self: start; }
   }
 </style>
