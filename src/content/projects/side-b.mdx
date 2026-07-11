@@ -3,13 +3,13 @@ title: { en: Side B, zh: Side B }
 year: { en: 'Apr 2026', zh: '2026 年 4 月' }
 status: { en: Working iOS prototype, zh: 可运行的 iOS 原型 }
 order: 2
-summary: { en: A cross-platform music-sharing prototype that resolves a song once, then makes it easy to save, route, and discuss together., zh: 一个跨平台音乐分享原型：识别歌曲后，支持收藏、跳转和共同讨论。 }
+summary: { en: A cross-platform music-sharing prototype that turns a link into a track you can identify, save, and share in context., zh: 一个跨平台音乐分享原型：先确认链接指向哪一首歌，再收藏、跳转或留在对话里继续聊。 }
 role: { en: Product concept, interaction design, SwiftUI, and service prototyping, zh: 产品概念、交互设计、SwiftUI 与服务原型开发 }
 accent: coral
 media:
   type: image
   src: /media/side-b/side-b-journey-hero.webp
-  alt: { en: Side B iOS screens showing a resolved song, a shared listening-room conversation, and a room-based link input., zh: Side B 的 iOS 界面，展示解析后的歌曲、听歌房间中的对话，以及房间内的链接输入。 }
+  alt: { en: Side B iOS screens showing a resolved song, a listening-room conversation, and a personal music library., zh: Side B 的 iOS 界面，展示解析后的歌曲、听歌房间中的对话，以及个人音乐收藏。 }
 links:
   - label: { en: View on GitHub, zh: 在 GitHub 查看 }
     href: https://github.com/0mn1si2i5/Side-B
@@ -19,45 +19,45 @@ import SideBGallery from '../../components/SideBGallery.astro';
 
 <section lang="en" data-locale-content="en">
 
-## What I noticed
+## Why sharing a song still breaks down
 
-Sharing a song should be a small social gesture. Instead, the link can send the recipient to the wrong platform, strip away useful context, or turn a recommendation into a dead end.
+Your friend listens on NetEase; you use Spotify. Most of the time, sharing becomes sending a title and asking the other person to search again. That is merely annoying until it is a track in another language, a live cut, or a reissue—then it is easy to land on the wrong version. A small recommendation can stall before either person hits play.
 
-## What I explored
+## How Side B handles it
 
-I explored what a platform-agnostic sharing experience could feel like: a link that first understands the song, then preserves the momentum of the recommendation across different listening habits.
+Side B accepts Spotify, Apple Music, NetEase Cloud Music, and QQ Music links, then resolves them into one track object before showing the available destinations. The point is not to create another player; it is to remove the guesswork between receiving a recommendation and hearing the intended song.
 
-## What I made
+## What I built
 
-I designed and built the core “parse — gather — share” flow as a SwiftUI iOS prototype with a FastAPI service behind it. The system resolves Spotify, Apple Music, NetEase Cloud Music, and QQ Music inputs into a canonical song object, then supports local saving, platform routing, and room-based discussion with persisted messages and live updates.
+I built the core “parse — gather — share” flow as a SwiftUI iOS prototype with a FastAPI service behind it. The app keeps recent resolutions and personal playlists locally, routes people to their preferred platforms, and lets a room hold song cards, replies, and reactions in one place.
 
-The screens shown here use real resolver output with a curated local listening room: a song detail view makes the available destinations legible, while the room keeps the song card, reply, and reactions in the same social context.
+The screens shown here use real resolver output and a curated local listening room. They show both entry points: resolving a link for yourself and resolving it directly in the conversation where it was shared.
 
-## What I learned
+## What I would test next
 
-The project remains a prototype, but building the working path made the cost of a wrong match concrete. A platform button only feels useful when the system can earn the user's trust in the song it points to. That became the guiding constraint: show real destinations when they exist, and keep uncertainty visible instead of presenting a guess as a success.
+Side B also raises a harder product question: will people install another app just to share a song? I would test two different answers. One is to make the resolver almost invisible—bring it to a mini-program or web handoff, then send people straight to the service they already use. The other is to make the destination worth opening—recurring rooms, shared collections, and lightweight community features can give recommendations a place to accumulate. The first reduces the cost of a single use; the second gives people a reason to return.
 
 </section>
 
 <section lang="zh-CN" data-locale-content="zh">
 
-## 我注意到的问题
+## 为什么分享一首歌，常常还是很麻烦
 
-跨平台分享音乐时，链接可能无法在接收方常用的平台直接打开，也容易丢失歌曲信息和分享语境，降低一条推荐真正被听到的可能性。
+朋友用网易云，你用 Spotify。大多数时候，分享一首歌最后会变成：他把歌名发给你，你再自己搜一遍。平时只是多几步；碰上小语种、现场版或重制版，就很容易搜到另一首。原本一句“你听听这个”，可能还没开始播放就断在了中间。
 
-## 我探索的方向
+## Side B 怎么处理这件事
 
-我探索一种平台无关的分享体验：先识别歌曲，再根据不同的听歌习惯提供可用去向，并保留推荐本身的社交语境。
+Side B 接住 Spotify、Apple Music、网易云音乐和 QQ 音乐的链接，先把它们识别成同一首歌，再展示可用的去向。它不是想再做一个播放器，而是想把“收到推荐”和“听到对方说的那一首”之间的猜测去掉。
 
-## 我做出的东西
+## 我做了什么
 
-我将“解析 — 汇集 — 分享”实现为 SwiftUI iOS 原型，并以 FastAPI 服务提供支持。系统将 Spotify、Apple Music、网易云音乐和 QQ 音乐的输入统一解析为标准歌曲对象，随后提供本地收藏、平台跳转，以及具备持久消息和实时更新的房间讨论。
+我把“解析 — 汇集 — 分享”的核心流程做成了 SwiftUI iOS 原型，后端由 FastAPI 支撑。App 会在本地保留最近解析和个人歌单，支持跳转到常用平台；房间里则把歌曲卡片、回复和表情回应放在同一处。
 
-页面展示真实的解析结果与本地听歌房间。歌曲详情页清晰呈现可用平台；房间页则将歌曲卡片、回复和反应置于同一讨论上下文中。
+这里展示的是实际解析结果和一个本地策展的听歌房间：既可以为自己解析一条链接，也可以直接在分享它的对话里完成解析。
 
-## 我学到的事
+## 下一步要验证什么
 
-项目仍处于原型阶段，但完整实现后可以明确看到错误匹配的成本。平台跳转只有在歌曲识别可信时才有价值，因此系统的核心约束是：存在可靠去向时再展示；存在不确定性时如实呈现，而不将猜测包装为成功结果。
+但 Side B 也绕不开一个更现实的问题：为了分享一首歌，用户为什么要多装一个 App？下一步我会验证两种不同的回答。第一种是把解析能力做得几乎无感：迁到小程序或网页，用更顺的跳转把人直接带回常用平台。第二种是把房间做成值得再打开的地方：让共同收藏、主题房间和熟人互动慢慢积累起来。前者降低单次使用的成本，后者给用户一个留下来的理由。
 
 </section>
 
