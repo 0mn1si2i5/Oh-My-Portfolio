@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { project: CollectionEntry<'projects'>; compact?: boolean; }
+const { project, compact = false } = Astro.props;
+const { media, title, accent } = project.data;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const asset = (path?: string) => path ? `${base}${path.replace(/^\//, '')}` : undefined;
+---
+
+{media.type === 'video' && media.src ? (
+  <div class:list={['project-media', `accent-${accent}`, { compact }]}>
+    {compact ? (
+      <img src={asset(media.poster)} alt={media.alt} loading="lazy" />
+    ) : (
+      <video controls preload="metadata" poster={asset(media.poster)} aria-label={`${title} video preview`}>
+        <source src={asset(media.src)} type="video/mp4" />
+        Your browser does not support embedded video. <a href={asset(media.src)}>Download the preview</a>.
+      </video>
+    )}
+  </div>
+) : (
+  <div class:list={['project-media', 'media-placeholder', `accent-${accent}`, { compact }]} role="img" aria-label={media.alt}>
+    <div class="placeholder-line short"></div>
+    <div class="placeholder-line"></div>
+    <div class="placeholder-orb"></div>
+    <span>Project visuals in progress</span>
+  </div>
+)}
+
+<style>
+  .project-media { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+  video, img { display: block; width: 100%; height: 100%; object-fit: cover; background: #111; }
+  .media-placeholder { padding: clamp(1.2rem, 3vw, 2rem); display: flex; flex-direction: column; justify-content: flex-end; gap: .7rem; }
+  .media-placeholder::before { content: ''; position: absolute; inset: 11% 15%; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); border-radius: 12px; transform: rotate(-5deg); }
+  .placeholder-line { position: relative; z-index: 1; height: 9px; width: 52%; border-radius: 999px; background: color-mix(in srgb, var(--accent) 35%, var(--surface)); }
+  .placeholder-line.short { width: 28%; }
+  .placeholder-orb { position: absolute; width: 26%; aspect-ratio: 1; top: 13%; right: 14%; border-radius: 50%; background: color-mix(in srgb, var(--accent) 48%, transparent); filter: blur(1px); }
+  .media-placeholder span { position: relative; z-index: 1; color: var(--muted); font-size: .82rem; }
+  .accent-violet { --accent: var(--violet); } .accent-coral { --accent: var(--coral); } .accent-blue { --accent: var(--blue); }
+</style>

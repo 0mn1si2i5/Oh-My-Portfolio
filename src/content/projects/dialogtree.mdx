@@ -1,0 +1,35 @@
+---
+title: DialogTree
+year: '2025—2026'
+status: Private research product
+order: 1
+summary: A tree-shaped workspace for revisiting, organizing, and understanding long-running LLM conversations.
+role: Product, interaction, and full-stack development
+accent: violet
+media:
+  type: video
+  src: /media/dialogtree-preview.mp4
+  poster: /media/dialogtree-poster.jpg
+  alt: A preview of DialogTree's tree-based conversation workspace.
+links:
+  - label: Open live demo
+    href: https://chat.golir.top/
+  - label: Read CHI 2026 Poster
+    href: https://doi.org/10.1145/3772363.3798792
+---
+
+## What I noticed
+
+Long LLM conversations are usually stored as a single, linear transcript. Once an exploration splits into alternatives, earlier decisions become hard to revisit, compare, or reuse without manually rebuilding context.
+
+## What I explored
+
+I explored whether a conversation could be treated as a navigable knowledge structure rather than a scrolling record. The question was not simply how to show more messages, but how to help people return to a thought, follow its context, and confidently branch from it.
+
+## What I made
+
+DialogTree turns conversations into an interactive tree. People can navigate paths, branch from any point, annotate meaningful nodes, and search across conversations using both text and semantic retrieval. The product pairs a D3-powered tree workspace with streaming chat, persistent conversation history, and retrieval-aware search.
+
+## What I learned
+
+The interaction became the basis for _Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_, presented as an ACM CHI 2026 Poster. In a 12-participant study, the tree interface improved efficiency on complex information-revisitation tasks and reduced cognitive burden. DialogTree remains private work; the live demo is shared here, but its source code is not.

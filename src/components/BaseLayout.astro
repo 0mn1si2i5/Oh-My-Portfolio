@@ -1,0 +1,91 @@
+---
+import { site } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.name, description = site.description } = Astro.props;
+const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (() => {
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme === 'dark' || savedTheme === 'light'
+          ? savedTheme
+          : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="monogram" href={base} aria-label={`${site.name}, home`}>{site.shortName}</a>
+      <nav aria-label="Primary navigation">
+        <a href={`${base}#work`}>Work</a>
+        <a href={`${base}#about`}>About</a>
+        <a href={`${base}notes`}>Notes</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+        <span aria-hidden="true">◐</span><span class="theme-label">Theme</span>
+      </button>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <span>© {new Date().getFullYear()} {site.name}</span>
+      <a href={site.github} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </footer>
+    <script>
+      const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+      const updateButton = () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        button?.setAttribute('aria-pressed', String(isDark));
+        if (button) button.querySelector('.theme-label')!.textContent = isDark ? 'Light' : 'Dark';
+      };
+      updateButton();
+      button?.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem('theme', nextTheme);
+        updateButton();
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root { --paper: #f7f6f2; --surface: #eeece6; --ink: #1b1b1a; --muted: #716f69; --line: #d8d5cc; --violet: #7659d7; --coral: #d46754; --blue: #477bb7; }
+  :root[data-theme='dark'] { --paper: #171716; --surface: #242320; --ink: #f2f1ed; --muted: #aaa79e; --line: #3a3935; --violet: #af9aff; --coral: #ff9a87; --blue: #8dbdff; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--paper); }
+  body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.55; letter-spacing: -0.01em; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 2px; }
+  .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 5; padding: .5rem .75rem; background: var(--ink); color: var(--paper); }
+  .skip-link:focus { top: 1rem; }
+  .site-header, .site-footer { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; display: flex; align-items: center; }
+  .site-header { min-height: 84px; justify-content: space-between; border-bottom: 1px solid var(--line); }
+  .monogram { font-weight: 730; letter-spacing: -0.08em; text-decoration: none; }
+  nav { display: flex; gap: 1.25rem; margin-left: auto; margin-right: 1.25rem; }
+  nav a, .theme-toggle, .site-footer { font-size: .84rem; font-weight: 560; }
+  nav a { text-decoration: none; color: var(--muted); }
+  nav a:hover { color: var(--ink); }
+  .theme-toggle { display: inline-flex; align-items: center; gap: .38rem; padding: .45rem .62rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
+  .site-footer { justify-content: space-between; min-height: 94px; color: var(--muted); border-top: 1px solid var(--line); }
+  @media (max-width: 560px) { .site-header, .site-footer { width: min(100% - 2rem, 1180px); } nav { gap: .85rem; margin-right: .75rem; } .theme-label { display: none; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+</style>

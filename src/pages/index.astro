@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../components/BaseLayout.astro';
+import ProjectMedia from '../components/ProjectMedia.astro';
+import { site } from '../config/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout>
+  <section class="hero page-width">
+    <p class="eyebrow">Jiaming Li · 李佳鸣</p>
+    <h1>I make tools for <em>thinking,</em><br />exploring, and connecting.</h1>
+    <div class="hero-bottom">
+      <p>I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable.</p>
+      <a class="quiet-link" href="#work">Selected explorations <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <section id="work" class="work-section page-width" aria-labelledby="work-title">
+    <div class="section-heading"><p class="eyebrow">Selected work</p><h2 id="work-title">Things I have been<br />following closely.</h2></div>
+    <div class="project-list">
+      {projects.map((project) => (
+        <article class:list={['project-card', `accent-${project.data.accent}`]}>
+          <a class="media-link" href={`${base}projects/${project.id}`} aria-label={`Read about ${project.data.title}`}><ProjectMedia project={project} compact /></a>
+          <div class="project-copy">
+            <div class="meta"><span>{project.data.year}</span><span>{project.data.status}</span></div>
+            <h3><a href={`${base}projects/${project.id}`}>{project.data.title}</a></h3>
+            <p>{project.data.summary}</p>
+            <a class="project-link" href={`${base}projects/${project.id}`}>Read the exploration <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="about" class="about-section page-width" aria-labelledby="about-title">
+    <div><p class="eyebrow">About</p><h2 id="about-title">A practice of<br />making things clear.</h2></div>
+    <div class="about-copy">
+      <p>I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes.</p>
+      <p>I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious.</p>
+      <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer">Find more on GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="other-section page-width" aria-labelledby="other-title">
+    <p class="eyebrow">Other work</p>
+    <div class="other-grid"><h2 id="other-title">Small things<br />with a longer life.</h2><article class="other-card"><p class="meta"><span>2022 — ongoing</span><span>Community mod</span></p><h3>RSZ Namelist</h3><p>A Chinese naming enhancement mod for <em>Stellaris</em>, made to let a universe feel more at home in Chinese.</p><p class="outcome">5,000+ active users</p><a href={site.links.rsz} target="_blank" rel="noreferrer">Visit Steam Workshop <span aria-hidden="true">↗</span></a></article></div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-width { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+  .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
+  .hero { min-height: min(700px, calc(100vh - 84px)); padding: clamp(5rem, 11vw, 10rem) 0 4rem; display: flex; flex-direction: column; justify-content: space-between; }
+  h1, h2, h3, p { margin-top: 0; } h1, h2, h3 { letter-spacing: -.055em; font-weight: 560; line-height: .98; }
+  h1 { max-width: 1000px; margin: 3rem 0; font-size: clamp(3.35rem, 7.1vw, 7.1rem); } h1 em { font-family: Georgia, serif; font-weight: 400; }
+  .hero-bottom { display: flex; justify-content: space-between; align-items: end; gap: 2rem; } .hero-bottom p { max-width: 430px; margin: 0; color: var(--muted); font-size: 1.08rem; }
+  .quiet-link, .project-link, .other-card a { font-weight: 620; text-decoration: none; } .quiet-link:hover, .project-link:hover, .other-card a:hover { text-decoration: underline; }
+  .work-section { padding: 7rem 0; border-top: 1px solid var(--line); }.section-heading { display: flex; justify-content: space-between; margin-bottom: 4rem; }.section-heading h2, .about-section h2, .other-section h2 { margin-bottom: 0; font-size: clamp(2.4rem, 5vw, 4.6rem); }
+  .project-list { display: grid; gap: 5rem; }.project-card { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(250px, .8fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }.project-card:nth-child(even) .media-link { order: 2; }.media-link { display: block; }.project-copy .meta, .other-card .meta { display: flex; justify-content: space-between; gap: 1rem; }.project-copy h3 { margin: 1.4rem 0 1rem; font-size: clamp(2.25rem, 4vw, 4.25rem); }.project-copy h3 a { text-decoration: none; }.project-copy p { max-width: 340px; color: var(--muted); }.project-link { display: inline-block; margin-top: .5rem; }.accent-violet .project-link { color: var(--violet); }.accent-coral .project-link { color: var(--coral); }.accent-blue .project-link { color: var(--blue); }
+  .about-section { padding: 8rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; border-top: 1px solid var(--line); }.about-copy { max-width: 530px; }.about-copy p { font-size: 1.25rem; line-height: 1.45; }.about-copy p + p { color: var(--muted); }.about-copy .quiet-link { display: inline-block; margin-top: 1.5rem; }
+  .other-section { padding: 7rem 0; border-top: 1px solid var(--line); }.other-section > .eyebrow { margin-bottom: 1.5rem; }.other-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }.other-card { max-width: 440px; padding: 1.8rem; background: var(--surface); border-radius: 14px; }.other-card h3 { margin: 2rem 0 .9rem; font-size: 2rem; }.other-card p { color: var(--muted); }.other-card .outcome { margin: 1.7rem 0 .6rem; color: var(--ink); font-weight: 650; }.other-card a { color: var(--blue); }
+  @media (max-width: 760px) { .hero { min-height: 620px; }.hero-bottom, .section-heading, .project-card, .about-section, .other-grid { grid-template-columns: 1fr; display: grid; }.hero-bottom { align-items: start; }.project-card:nth-child(even) .media-link { order: 0; }.project-list { gap: 4rem; }.work-section, .about-section, .other-section { padding: 5rem 0; }.section-heading { gap: 1.3rem; }.about-section { gap: 2.5rem; } }
+  @media (max-width: 560px) { .page-width { width: min(100% - 2rem, 1180px); } h1 { font-size: clamp(3rem, 15vw, 4.6rem); }.hero { padding-top: 4rem; }.project-card { gap: 1.5rem; } }
+</style>
