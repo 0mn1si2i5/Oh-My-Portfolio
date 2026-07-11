@@ -1,14 +1,15 @@
 ---
 title: NBTI
 year: '2025'
-status: Independent experiment
+status: Live independent product
 order: 3
-summary: A small independent product experiment, made to explore a playful idea through a complete web experience.
-role: Product experiment and web development
+summary: A privacy-first personality experience that uses 24 everyday situations to reflect your choices through 32 figures from the Wei–Jin and Northern–Southern Dynasties.
+role: Product concept, interaction design, content system, and front-end development
 accent: blue
 media:
-  type: placeholder
-  alt: Placeholder for NBTI project screenshots.
+  type: image
+  src: /media/nbti-home.png
+  alt: NBTI’s home screen, with its personality-test prompt and three illustrated historical figures.
 links:
   - label: Visit website
     href: https://0mn1si2i5.github.io/NBTI/
@@ -16,18 +17,18 @@ links:
     href: https://github.com/0mn1si2i5/NBTI
 ---
 
-## What I noticed
+## The premise
 
-Small, opinionated ideas often reveal more about product-making than a long requirements document: where curiosity begins, what deserves polish, and when an experience feels complete enough to share.
+Personality tests are engaging because they give people a language for noticing themselves. NBTI asks whether that reflection can feel less like a diagnosis and more like looking into a set of historical mirrors: complex people, imperfect evidence, and no single answer that settles who someone was.
 
-## What I explored
+## The experience
 
-NBTI was an independent space to turn a compact premise into something people could directly try, without treating experimentation as a lesser version of product work.
+The experience is mobile-first and intentionally direct. People move through 18 concrete scenarios and six calibration questions, then receive a result built from six action tendencies: a primary historical counterpart, nearby and contrasting matches, a short reading, and links to the source material behind the historical notes.
 
-## What I made
+## The system behind it
 
-I designed and built NBTI as a public web experience, from its initial concept through implementation and deployment. It remains deliberately lightweight: a focused interaction instead of an oversized platform.
+I designed the product, interaction flow, visual direction, and the matching system, then built it as a static React site. A deterministic distance model compares each response vector with 32 character profiles, so every result is generated locally and repeatably—without an account, cookies, analytics, or saved answers.
 
-## What I learned
+## A careful use of history
 
-The project reinforced a simple practice I value: make the smallest complete thing that lets an idea meet a real audience, then learn from that encounter.
+NBTI is a playful cultural experience, not a psychological or scientific assessment. The historical figures are loose points of comparison rather than proof of a personality label; the result writing keeps the user’s present choices in focus and treats the past as material for reflection, not a verdict.
