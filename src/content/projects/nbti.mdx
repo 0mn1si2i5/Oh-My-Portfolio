@@ -1,21 +1,23 @@
 ---
-title: NBTI
-year: '2025'
-status: Live independent product
+title: { en: NBTI, zh: NBTI }
+year: { en: '2025', zh: '2025' }
+status: { en: Live independent product, zh: 已上线的独立产品 }
 order: 3
-summary: A privacy-first personality experience that uses 24 everyday situations to reflect your choices through 32 figures from the Wei–Jin and Northern–Southern Dynasties.
-role: Product concept, interaction design, content system, and front-end development
+summary: { en: A privacy-first personality experience that uses 24 everyday situations to reflect your choices through 32 figures from the Wei–Jin and Northern–Southern Dynasties., zh: 一个隐私优先的人格体验：通过 24 个日常情境，以魏晋南北朝的 32 位人物映照你的选择。 }
+role: { en: Product concept, interaction design, content system, and front-end development, zh: 产品概念、交互设计、内容系统与前端开发 }
 accent: blue
 media:
   type: image
   src: /media/nbti-home.png
-  alt: NBTI’s home screen, with its personality-test prompt and three illustrated historical figures.
+  alt: { en: NBTI’s home screen, with its personality-test prompt and three illustrated historical figures., zh: NBTI 首页，展示人格测试引导与三位插画历史人物。 }
 links:
-  - label: Visit website
+  - label: { en: Visit website, zh: 访问网站 }
     href: https://0mn1si2i5.github.io/NBTI/
-  - label: View on GitHub
+  - label: { en: View on GitHub, zh: 在 GitHub 查看 }
     href: https://github.com/0mn1si2i5/NBTI
 ---
+
+<section lang="en" data-locale-content="en">
 
 ## The premise
 
@@ -32,3 +34,25 @@ I designed the product, interaction flow, visual direction, and the matching sys
 ## A careful use of history
 
 NBTI is a playful cultural experience, not a psychological or scientific assessment. The historical figures are loose points of comparison rather than proof of a personality label; the result writing keeps the user’s present choices in focus and treats the past as material for reflection, not a verdict.
+
+</section>
+
+<section lang="zh-CN" data-locale-content="zh">
+
+## 起点
+
+人格测试之所以吸引人，是因为它为人们观察自己提供了一种语言。NBTI 想尝试的是：这种自我映照能否不那么像诊断，而更像一组历史的镜子——复杂的人、不完美的史料，以及没有一个答案能彻底定义谁是谁。
+
+## 体验
+
+体验以移动端为先，并刻意保持直接。用户会经历 18 个具体情境与 6 个校准问题，随后得到由六种行动倾向构成的结果：一位主要的历史对应者、相近与对照的人物、一段简短解读，以及通往历史资料来源的链接。
+
+## 背后的系统
+
+我设计了产品、交互流程、视觉方向与匹配系统，并将其实现为一个静态 React 网站。确定性的距离模型会将每个回答向量与 32 个人物档案比较，因此所有结果都在本地、可重复地产生——不需要账户、Cookie、分析工具，也不会保存答案。
+
+## 谨慎地使用历史
+
+NBTI 是一个带有游戏感的文化体验，而非心理或科学测评。历史人物是松散的参照点，并不用于证明某种人格标签；结果文案始终把用户当下的选择放在中心，将过去作为反思的材料，而不是结论。
+
+</section>

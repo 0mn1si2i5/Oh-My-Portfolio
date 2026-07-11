@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro';
+import Localized from '../components/Localized.astro';
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout title="Notes" description="Future notes by Jiaming Li.">
   <section class="notes page-width">
-    <p class="eyebrow">Notes</p>
-    <h1>Room for things<br />not finished yet.</h1>
-    <p class="lead">This is where I will leave short notes on making, research, and the questions that survive after a project ships.</p>
-    <div class="empty-state"><span aria-hidden="true">◌</span><p>No notes published yet.</p><p class="muted">For now, the projects are the notes.</p><a href={`${base}#work`}>Return to selected work <span aria-hidden="true">↑</span></a></div>
+    <p class="eyebrow"><Localized en="Notes" zh="随笔" /></p>
+    <h1><Localized en="Room for things not finished yet." zh="留给尚未完成之事的空间。" /></h1>
+    <p class="lead"><Localized en="This is where I will leave short notes on making, research, and the questions that survive after a project ships." zh="我会在这里留下有关创作、研究，以及项目上线后仍然存在的问题的短记。" /></p>
+    <div class="empty-state"><span aria-hidden="true">◌</span><p><Localized en="No notes published yet." zh="还没有发布随笔。" /></p><p class="muted"><Localized en="For now, the projects are the notes." zh="现在，项目本身就是随笔。" /></p><a href={`${base}#work`}><Localized en="Return to selected work" zh="返回精选项目" /> <span aria-hidden="true">↑</span></a></div>
   </section>
 </BaseLayout>
 

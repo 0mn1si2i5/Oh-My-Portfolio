@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../components/BaseLayout.astro';
 import ProjectMedia from '../components/ProjectMedia.astro';
+import Localized from '../components/Localized.astro';
 import { site } from '../config/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -11,24 +12,24 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <BaseLayout>
   <section class="hero page-width">
     <p class="eyebrow">Jiaming Li · 李佳鸣</p>
-    <h1>I make tools for <em>thinking,</em><br />exploring, and connecting.</h1>
+    <h1><Localized en="I make tools for thinking, exploring, and connecting." zh="我在制作帮助人们思考、探索与连接的工具。" /></h1>
     <div class="hero-bottom">
-      <p>I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable.</p>
-      <a class="quiet-link" href="#work">Selected explorations <span aria-hidden="true">↓</span></a>
+      <p><Localized en="I am a product builder and researcher interested in how people work with AI, understand information, and turn a small curiosity into something shareable." zh="我是产品构建者与研究者，关心人们如何与 AI 协作、理解信息，以及如何将一个小小的好奇心变成可分享的东西。" /></p>
+      <a class="quiet-link" href="#work"><Localized en="Selected explorations" zh="精选探索" /> <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
   <section id="work" class="work-section page-width" aria-labelledby="work-title">
-    <div class="section-heading"><p class="eyebrow">Selected work</p><h2 id="work-title">Things I have been<br />following closely.</h2></div>
+    <div class="section-heading"><p class="eyebrow"><Localized en="Selected work" zh="精选项目" /></p><h2 id="work-title"><Localized en="Things I have been following closely." zh="那些我一直认真追随的问题。" /></h2></div>
     <div class="project-list">
       {projects.map((project) => (
         <article class:list={['project-card', `accent-${project.data.accent}`]}>
-          <a class="media-link" href={`${base}projects/${project.id}`} aria-label={`Read about ${project.data.title}`}><ProjectMedia project={project} compact /></a>
+          <a class="media-link" href={`${base}projects/${project.id}`} aria-label={`Read about ${project.data.title.en}`}><ProjectMedia project={project} compact /></a>
           <div class="project-copy">
-            <div class="meta"><span>{project.data.year}</span><span>{project.data.status}</span></div>
-            <h3><a href={`${base}projects/${project.id}`}>{project.data.title}</a></h3>
-            <p>{project.data.summary}</p>
-            <a class="project-link" href={`${base}projects/${project.id}`}>Read the exploration <span aria-hidden="true">→</span></a>
+            <div class="meta"><span><Localized {...project.data.year} /></span><span><Localized {...project.data.status} /></span></div>
+            <h3><a href={`${base}projects/${project.id}`}><Localized {...project.data.title} /></a></h3>
+            <p><Localized {...project.data.summary} /></p>
+            <a class="project-link" href={`${base}projects/${project.id}`}><Localized en="Read the exploration" zh="阅读这项探索" /> <span aria-hidden="true">→</span></a>
           </div>
         </article>
       ))}
@@ -36,16 +37,16 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   </section>
 
   <section class="other-section page-width" aria-labelledby="other-title">
-    <p class="eyebrow">Other work</p>
-    <div class="other-grid"><h2 id="other-title">Small things<br />with a longer life.</h2><article class="other-card"><p class="meta"><span>May 2022</span><span>Community mod</span></p><h3>RSZ Namelist</h3><p>A Chinese naming enhancement mod for <em>Stellaris</em>, made to let a universe feel more at home in Chinese.</p><p class="outcome">5,000+ active users</p><a href={site.links.rsz} target="_blank" rel="noreferrer">Visit Steam Workshop <span aria-hidden="true">↗</span></a></article></div>
+    <p class="eyebrow"><Localized en="Other work" zh="其他作品" /></p>
+    <div class="other-grid"><h2 id="other-title"><Localized en="Small things with a longer life." zh="小事，也能有更长的生命。" /></h2><article class="other-card"><p class="meta"><span><Localized en="May 2022" zh="2022 年 5 月" /></span><span><Localized en="Community mod" zh="社区模组" /></span></p><h3>RSZ Namelist</h3><p><Localized en="A Chinese naming enhancement mod for Stellaris, made to let a universe feel more at home in Chinese." zh="一个为《群星》制作的中文命名增强模组，让宇宙在中文中也有更熟悉的感觉。" /></p><p class="outcome"><Localized en="5,000+ active users" zh="5,000+ 活跃用户" /></p><a href={site.links.rsz} target="_blank" rel="noreferrer"><Localized en="Visit Steam Workshop" zh="前往 Steam 创意工坊" /> <span aria-hidden="true">↗</span></a></article></div>
   </section>
 
   <section id="about" class="about-section page-width" aria-labelledby="about-title">
-    <div><p class="eyebrow">About</p><h2 id="about-title">A practice of<br />making things clear.</h2></div>
+    <div><p class="eyebrow"><Localized en="About" zh="关于" /></p><h2 id="about-title"><Localized en="A practice of making things clear." zh="让事情变得更清楚的练习。" /></h2></div>
     <div class="about-copy">
-      <p>I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes.</p>
-      <p>I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious.</p>
-      <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer">Find more on GitHub <span aria-hidden="true">↗</span></a>
+      <p><Localized en="I am currently studying Computer Science at the National University of Singapore and exploring human–AI collaboration with AI4SG Lab. My work moves between research questions, product decisions, and working prototypes." zh="我目前在新加坡国立大学学习计算机科学，并在 AI4SG Lab 探索人机协作。我的工作游走于研究问题、产品决策与可运行原型之间。" /></p>
+      <p><Localized en="I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious." zh="我喜欢从那些略显不便、或容易被忽略的地方开始：一段难以重新进入的对话、一个失去意义的音乐链接，或一个需要更好名字的小世界。然后让下一步交互变得顺理成章。" /></p>
+      <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer"><Localized en="Find more on GitHub" zh="在 GitHub 发现更多" /> <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </BaseLayout>

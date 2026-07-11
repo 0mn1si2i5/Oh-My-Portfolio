@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../components/BaseLayout.astro';
 import ProjectMedia from '../../components/ProjectMedia.astro';
+import Localized from '../../components/Localized.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -14,26 +15,26 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 ---
 
-<BaseLayout title={project.data.title} description={project.data.summary}>
+<BaseLayout title={project.data.title.en} description={project.data.summary.en}>
   <article class:list={['project-page', `accent-${project.data.accent}`]}>
     <header class="project-hero page-width">
-      <p class="eyebrow"><a href={`${base}#work`}>Selected work</a> <span aria-hidden="true">/</span> {project.data.year}</p>
-      <div class="hero-grid"><div><h1>{project.data.title}</h1><p class="summary">{project.data.summary}</p></div><dl><div><dt>Status</dt><dd>{project.data.status}</dd></div><div><dt>My focus</dt><dd>{project.data.role}</dd></div></dl></div>
+      <p class="eyebrow"><a href={`${base}#work`}><Localized en="Selected work" zh="精选项目" /></a> <span aria-hidden="true">/</span> <Localized {...project.data.year} /></p>
+      <div class="hero-grid"><div><h1><Localized {...project.data.title} /></h1><p class="summary"><Localized {...project.data.summary} /></p></div><dl><div><dt><Localized en="Status" zh="状态" /></dt><dd><Localized {...project.data.status} /></dd></div><div><dt><Localized en="My focus" zh="我的工作" /></dt><dd><Localized {...project.data.role} /></dd></div></dl></div>
     </header>
     <section class="media-section page-width"><ProjectMedia project={project} /></section>
     {project.data.media.walkthrough && (
       <section class:list={['walkthrough-section', 'page-width', { 'side-b-walkthrough': project.id === 'side-b' }]} aria-labelledby="walkthrough-title">
-        <p class="eyebrow">Walkthrough</p>
-        <h2 id="walkthrough-title">{project.id === 'side-b' ? 'A short product preview.' : 'See the product in motion.'}</h2>
-        <video controls preload="metadata" poster={asset(project.data.media.walkthrough.poster ?? project.data.media.src ?? '')} aria-label={`${project.data.title} product walkthrough`}>
+        <p class="eyebrow"><Localized en="Walkthrough" zh="演示视频" /></p>
+        <h2 id="walkthrough-title">{project.id === 'side-b' ? <Localized en="A short product preview." zh="一个简短的产品预览。" /> : <Localized en="See the product in motion." zh="看看产品如何运作。" />}</h2>
+        <video controls preload="metadata" poster={asset(project.data.media.walkthrough.poster ?? project.data.media.src ?? '')} aria-label={`${project.data.title.en} product walkthrough`}>
           <source src={asset(project.data.media.walkthrough.src)} type="video/mp4" />
-          Your browser does not support embedded video. <a href={asset(project.data.media.walkthrough.src)}>Download the walkthrough</a>.
+          <Localized en="Your browser does not support embedded video." zh="你的浏览器不支持嵌入式视频。" /> <a href={asset(project.data.media.walkthrough.src)}><Localized en="Download the walkthrough" zh="下载演示视频" /></a>.
         </video>
-        {project.id === 'dialogtree' && <p style="margin: 1rem 0 0; color: var(--muted); font-size: .9rem;">Video edited in CapCut.</p>}
+        {project.id === 'dialogtree' && <p style="margin: 1rem 0 0; color: var(--muted); font-size: .9rem;"><Localized en="Video edited in CapCut." zh="视频由 CapCut 剪辑。" /></p>}
       </section>
     )}
-    <section class="project-body page-width"><div class="body-label">Exploration</div><div class="prose"><Content /></div></section>
-    <section class="explore-section page-width" aria-labelledby="explore-title"><p class="eyebrow">Explore</p><h2 id="explore-title">Continue from here.</h2><div class="links">{project.data.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer">{link.label} <span aria-hidden="true">↗</span></a>)}</div></section>
+    <section class="project-body page-width"><div class="body-label"><Localized en="Exploration" zh="探索" /></div><div class="prose"><Content /></div></section>
+    <section class="explore-section page-width" aria-labelledby="explore-title"><p class="eyebrow"><Localized en="Explore" zh="继续探索" /></p><h2 id="explore-title"><Localized en="Continue from here." zh="从这里继续。" /></h2><div class="links">{project.data.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer"><Localized {...link.label} /> <span aria-hidden="true">↗</span></a>)}</div></section>
   </article>
 </BaseLayout>
 

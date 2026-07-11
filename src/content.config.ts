@@ -1,15 +1,20 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const localized = z.object({
+  en: z.string(),
+  zh: z.string(),
+});
+
 const projects = defineCollection({
   loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
-    title: z.string(),
-    year: z.string(),
-    status: z.string(),
+    title: localized,
+    year: localized,
+    status: localized,
     order: z.number(),
-    summary: z.string(),
-    role: z.string(),
+    summary: localized,
+    role: localized,
     accent: z.enum(['violet', 'coral', 'blue']),
     media: z.object({
       type: z.enum(['video', 'image', 'placeholder']),
@@ -17,9 +22,9 @@ const projects = defineCollection({
       preview: z.string().optional(),
       poster: z.string().optional(),
       walkthrough: z.object({ src: z.string(), poster: z.string().optional() }).optional(),
-      alt: z.string(),
+      alt: localized,
     }),
-    links: z.array(z.object({ label: z.string(), href: z.string().url() })),
+    links: z.array(z.object({ label: localized, href: z.string().url() })),
   }),
 });
 

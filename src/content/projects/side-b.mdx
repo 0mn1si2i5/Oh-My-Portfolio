@@ -1,10 +1,10 @@
 ---
-title: Side B
-year: '2026'
-status: Working iOS prototype
+title: { en: Side B, zh: Side B }
+year: { en: '2026', zh: '2026' }
+status: { en: Working iOS prototype, zh: 可运行的 iOS 原型 }
 order: 2
-summary: A cross-platform music-sharing prototype that resolves a song once, then makes it easy to save, route, and discuss together.
-role: Product concept, interaction design, SwiftUI, and service prototyping
+summary: { en: A cross-platform music-sharing prototype that resolves a song once, then makes it easy to save, route, and discuss together., zh: 一个跨平台音乐分享原型：只需识别一次歌曲，即可轻松收藏、跳转与一起讨论。 }
+role: { en: Product concept, interaction design, SwiftUI, and service prototyping, zh: 产品概念、交互设计、SwiftUI 与服务原型开发 }
 accent: coral
 media:
   type: image
@@ -12,13 +12,15 @@ media:
   walkthrough:
     src: /media/side-b-preview.mp4
     poster: /media/side-b-hero.png
-  alt: Side B iOS screens showing music resolution, song details, and a shared listening room.
+  alt: { en: Side B iOS screens showing music resolution, song details, and a shared listening room., zh: Side B 的 iOS 界面，展示音乐识别、歌曲详情与共享听歌房间。 }
 links:
-  - label: View on GitHub
+  - label: { en: View on GitHub, zh: 在 GitHub 查看 }
     href: https://github.com/0mn1si2i5/Side-B
 ---
 
 import SideBGallery from '../../components/SideBGallery.astro';
+
+<section lang="en" data-locale-content="en">
 
 ## What I noticed
 
@@ -34,8 +36,32 @@ I designed and built the core “parse — gather — share” flow as a SwiftUI
 
 The screens shown here use real resolver output with a curated local listening room: a song detail view makes the available destinations legible, while the room keeps the song card, reply, and reactions in the same social context.
 
-<SideBGallery />
-
 ## What I learned
 
 The project remains a prototype, but building the working path made the cost of a wrong match concrete. A platform button only feels useful when the system can earn the user's trust in the song it points to. That became the guiding constraint: show real destinations when they exist, and keep uncertainty visible instead of presenting a guess as a success.
+
+</section>
+
+<section lang="zh-CN" data-locale-content="zh">
+
+## 我注意到的问题
+
+分享一首歌本该是一个很小的社交动作，但链接常常会把对方带到错误的平台、抹掉有用的语境，或让一条推荐走向无处可去的终点。
+
+## 我探索的方向
+
+我在探索一种不受平台限制的分享体验：链接先理解这首歌，再在不同的听歌习惯之间保留推荐本来的节奏。
+
+## 我做出的东西
+
+我将核心的“解析 — 汇集 — 分享”流程设计并实现为一个 SwiftUI iOS 原型，后端由 FastAPI 服务支持。系统把 Spotify、Apple Music、网易云音乐与 QQ 音乐的输入解析为统一的歌曲对象，并支持本地收藏、平台跳转，以及拥有持久消息和实时更新的房间讨论。
+
+这里的屏幕来自真实的解析结果与一个精心设置的本地听歌房间：歌曲详情页让可用去向一目了然，房间则让歌曲卡片、回复与反应保留在同一个社交语境中。
+
+## 我学到的事
+
+项目仍是原型，但走完可运行的路径后，我具体感受到一次错误匹配的代价。平台按钮只有在系统先赢得用户对它所指向歌曲的信任时才真正有用。因此，这成为核心约束：有真实去向时就展示它；不确定时保持可见，而不把猜测包装成成功。
+
+</section>
+
+<SideBGallery />

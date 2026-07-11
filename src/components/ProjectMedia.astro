@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Localized from './Localized.astro';
 
 interface Props { project: CollectionEntry<'projects'>; compact?: boolean; }
 const { project, compact = false } = Astro.props;
@@ -12,24 +13,24 @@ const imageSource = compact && media.preview ? media.preview : media.src;
 {media.type === 'video' && media.src ? (
   <div class:list={['project-media', `accent-${accent}`, { compact }]}>
     {compact ? (
-      <img src={asset(media.poster)} alt={media.alt} loading="lazy" />
+      <img src={asset(media.poster)} alt={media.alt.en} data-alt-en={media.alt.en} data-alt-zh={media.alt.zh} loading="lazy" />
     ) : (
-      <video controls preload="metadata" poster={asset(media.poster)} aria-label={`${title} video preview`}>
+      <video controls preload="metadata" poster={asset(media.poster)} aria-label={`${title.en} video preview`}>
         <source src={asset(media.src)} type="video/mp4" />
-        Your browser does not support embedded video. <a href={asset(media.src)}>Download the preview</a>.
+        <Localized en="Your browser does not support embedded video." zh="你的浏览器不支持嵌入式视频。" /> <a href={asset(media.src)}><Localized en="Download the preview" zh="下载预览视频" /></a>.
       </video>
     )}
   </div>
 ) : media.type === 'image' && media.src ? (
   <div class:list={['project-media', 'image-media', `accent-${accent}`, { compact, 'preview-media': compact && Boolean(media.preview) }]}>
-    <img src={asset(imageSource)} alt={media.alt} loading={compact ? 'lazy' : 'eager'} />
+    <img src={asset(imageSource)} alt={media.alt.en} data-alt-en={media.alt.en} data-alt-zh={media.alt.zh} loading={compact ? 'lazy' : 'eager'} />
   </div>
 ) : (
-  <div class:list={['project-media', 'media-placeholder', `accent-${accent}`, { compact }]} role="img" aria-label={media.alt}>
+  <div class:list={['project-media', 'media-placeholder', `accent-${accent}`, { compact }]} role="img" aria-label={media.alt.en}>
     <div class="placeholder-line short"></div>
     <div class="placeholder-line"></div>
     <div class="placeholder-orb"></div>
-    <span>Project visuals in progress</span>
+    <span><Localized en="Project visuals in progress" zh="项目视觉素材制作中" /></span>
   </div>
 )}
 

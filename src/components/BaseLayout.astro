@@ -1,5 +1,6 @@
 ---
 import { site } from '../config/site';
+import Localized from './Localized.astro';
 
 interface Props {
   title?: string;
@@ -12,7 +13,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-locale="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -27,18 +28,25 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           ? savedTheme
           : 'light';
         document.documentElement.dataset.theme = theme;
+        const savedLocale = localStorage.getItem('locale');
+        const locale = savedLocale === 'zh' ? 'zh' : 'en';
+        document.documentElement.dataset.locale = locale;
+        document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
       })();
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main"><Localized en="Skip to content" zh="跳至主要内容" /></a>
     <header class="site-header">
       <a class="monogram" href={base} aria-label={`${site.name}, home`}>{site.name}</a>
       <nav aria-label="Primary navigation">
-        <a href={`${base}#work`}>Work</a>
-        <a href={`${base}#about`}>About</a>
-        <a href={`${base}notes`}>Notes</a>
+        <a href={`${base}#work`}><Localized en="Work" zh="项目" /></a>
+        <a href={`${base}#about`}><Localized en="About" zh="关于" /></a>
+        <a href={`${base}notes`}><Localized en="Notes" zh="随笔" /></a>
       </nav>
+      <button class="locale-toggle" type="button" aria-label="切换至中文">
+        <span class="locale-label">中文</span>
+      </button>
       <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
         <span aria-hidden="true">◐</span><span class="theme-label">Theme</span>
       </button>
@@ -50,18 +58,35 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </footer>
     <script>
       const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+      const localeButton = document.querySelector<HTMLButtonElement>('.locale-toggle');
+      const setLocale = (locale: 'en' | 'zh') => {
+        document.documentElement.dataset.locale = locale;
+        document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
+        localStorage.setItem('locale', locale);
+        if (localeButton) {
+          localeButton.querySelector('.locale-label')!.textContent = locale === 'en' ? '中文' : 'EN';
+          localeButton.setAttribute('aria-label', locale === 'en' ? '切换至中文' : 'Switch to English');
+        }
+        document.querySelectorAll<HTMLElement>('[data-alt-en]').forEach((element) => {
+          element.setAttribute('alt', element.dataset[`alt${locale === 'en' ? 'En' : 'Zh'}`] ?? '');
+        });
+        updateButton();
+      };
       const updateButton = () => {
         const isDark = document.documentElement.dataset.theme === 'dark';
         button?.setAttribute('aria-pressed', String(isDark));
-        if (button) button.querySelector('.theme-label')!.textContent = isDark ? 'Light' : 'Dark';
+        const locale = document.documentElement.dataset.locale;
+        if (button) button.querySelector('.theme-label')!.textContent = locale === 'zh' ? (isDark ? '浅色' : '深色') : (isDark ? 'Light' : 'Dark');
+        button?.setAttribute('aria-label', locale === 'zh' ? '切换颜色主题' : 'Switch color theme');
       };
-      updateButton();
+      setLocale(document.documentElement.dataset.locale === 'zh' ? 'zh' : 'en');
       button?.addEventListener('click', () => {
         const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.dataset.theme = nextTheme;
         localStorage.setItem('theme', nextTheme);
         updateButton();
       });
+      localeButton?.addEventListener('click', () => setLocale(document.documentElement.dataset.locale === 'zh' ? 'en' : 'zh'));
     </script>
   </body>
 </html>
@@ -69,6 +94,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 <style is:global>
   :root { --paper: #f7f6f2; --surface: #eeece6; --ink: #1b1b1a; --muted: #716f69; --line: #d8d5cc; --violet: #7659d7; --coral: #d46754; --blue: #477bb7; }
   :root[data-theme='dark'] { --paper: #171716; --surface: #242320; --ink: #f2f1ed; --muted: #aaa79e; --line: #3a3935; --violet: #af9aff; --coral: #ff9a87; --blue: #8dbdff; }
+  [data-locale='en'] [data-locale-content='zh'], [data-locale='zh'] [data-locale-content='en'] { display: none !important; }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; background: var(--paper); }
   body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.55; letter-spacing: -0.01em; }
@@ -81,11 +107,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   .site-header { min-height: 84px; justify-content: space-between; border-bottom: 1px solid var(--line); }
   .monogram { font-size: .94rem; font-weight: 680; letter-spacing: -.045em; text-decoration: none; }
   nav { display: flex; gap: 1.25rem; margin-left: auto; margin-right: 1.25rem; }
-  nav a, .theme-toggle, .site-footer { font-size: .84rem; font-weight: 560; }
+  nav a, .theme-toggle, .locale-toggle, .site-footer { font-size: .84rem; font-weight: 560; }
   nav a { text-decoration: none; color: var(--muted); }
   nav a:hover { color: var(--ink); }
-  .theme-toggle { display: inline-flex; align-items: center; gap: .38rem; padding: .45rem .62rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
+  .theme-toggle, .locale-toggle { display: inline-flex; align-items: center; gap: .38rem; padding: .45rem .62rem; cursor: pointer; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 100px; font: inherit; }
   .site-footer { justify-content: space-between; min-height: 94px; color: var(--muted); border-top: 1px solid var(--line); }
-  @media (max-width: 560px) { .site-header, .site-footer { width: min(100% - 2rem, 1180px); } nav { gap: .85rem; margin-right: .75rem; } .theme-label { display: none; } }
+  @media (max-width: 560px) { .site-header, .site-footer { width: min(100% - 2rem, 1180px); } nav { gap: .85rem; margin-right: .75rem; } .theme-label { display: none; } .locale-toggle, .theme-toggle { padding: .42rem .5rem; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 </style>
