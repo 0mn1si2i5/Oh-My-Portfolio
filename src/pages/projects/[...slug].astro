@@ -29,6 +29,7 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
           <source src={asset(project.data.media.walkthrough.src)} type="video/mp4" />
           Your browser does not support embedded video. <a href={asset(project.data.media.walkthrough.src)}>Download the walkthrough</a>.
         </video>
+        {project.id === 'dialogtree' && <p style="margin: 1rem 0 0; color: var(--muted); font-size: .9rem;">Video edited in CapCut.</p>}
       </section>
     )}
     <section class="project-body page-width"><div class="body-label">Exploration</div><div class="prose"><Content /></div></section>
