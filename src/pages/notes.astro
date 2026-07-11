@@ -1,18 +1,57 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro';
 import Localized from '../components/Localized.astro';
-const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
-<BaseLayout title="Notes" description="Future notes by Jiaming Li.">
+<BaseLayout title="Notes" description="Notes on making, research, and human–AI collaboration by Jiaming Li.">
   <section class="notes page-width">
     <p class="eyebrow"><Localized en="Notes" zh="随笔" /></p>
-    <h1><Localized en="Room for things not finished yet." zh="记录尚未结束的问题。" /></h1>
-    <p class="lead"><Localized en="This is where I will leave short notes on making, research, and the questions that survive after a project ships." zh="这里将发布关于产品开发、研究过程及相关思考的短文。" /></p>
-    <div class="empty-state"><span aria-hidden="true">◌</span><p><Localized en="No notes published yet." zh="暂未发布文章。" /></p><p class="muted"><Localized en="For now, the projects are the notes." zh="目前可以先从项目页了解我的工作。" /></p><a href={`${base}#work`}><Localized en="Return to selected work" zh="返回精选项目" /> <span aria-hidden="true">↑</span></a></div>
+    <article class="note">
+      <p class="meta"><Localized en="July 2026 · Making" zh="2026 年 7 月 · 产品与开发" /></p>
+      <h1><Localized en="Vibe coding, with care for what comes after." zh="Vibe Coding：也要为交付之后负责。" /></h1>
+      <p class="lead"><Localized en="What I am learning from moving between ideas, interfaces, systems, and the people who actually use them." zh="从想法、界面、系统到真实使用者：我在实践中逐渐形成的一些判断。" /></p>
+
+      <div class="prose" lang="en" data-locale-content="en">
+        <p>Vibe coding has made the first version of an idea feel unusually close. A rough need can become an interface, a service, and a deployed page in a short stretch of focused conversation with a model. That speed is genuinely joyful—not because it removes the work, but because it lets me stay close to a question while it is still alive.</p>
+
+        <h2>Speed changes where the craft lives.</h2>
+        <p>I have found that the craft moves upstream and downstream. Before writing code, it lives in framing: what is the smallest useful outcome, what should remain simple, and whose judgment should stay in the loop? During implementation, it lives in making the front end legible, the back end dependable, and the handoff between them unsurprising. Deployment is not an afterthought either; it is the moment an experiment becomes a thing someone else can trust.</p>
+
+        <h2>Models are collaborators, not a substitute for ownership.</h2>
+        <p>I use models to explore alternatives, surface blind spots, and turn a sketch into a working system faster. But I still want to understand the path through the system well enough to revise it deliberately. The useful division of labor is not “human for ideas, AI for execution.” It is a continuing conversation: I set the purpose and constraints, test the output against reality, and decide what deserves another pass.</p>
+
+        <h2>The best feedback arrives in use.</h2>
+        <p>Recently, I have been building small tools that help colleagues move through everyday work with less friction. Seeing something I made become part of another person’s routine is a quiet kind of happiness. Their questions reveal the parts I did not anticipate; the next iteration makes the tool a little more considerate. That loop—from noticing a problem, to making a response, to learning from use—is why I keep building.</p>
+      </div>
+
+      <div class="prose" lang="zh-CN" data-locale-content="zh">
+        <p>Vibe coding 让一个想法离可用版本变得很近。一个模糊的需求，可以在与模型持续协作的过程中，较快地长成界面、服务和真正可访问的网页。这种速度让我感到兴奋，并不是因为它省去了工作，而是因为我能在问题还鲜活的时候持续推进它。</p>
+
+        <h2>速度改变了“功夫”出现的位置。</h2>
+        <p>我越来越觉得，开发的功夫被推到了前后两端。开始写代码前，要先想清楚：最小但真正有用的结果是什么？哪些地方应当保持克制？哪些判断必须由人来做？实现过程中，则要让前端表达清楚，让后端足够可靠，也让两者之间的衔接符合直觉。部署也不是收尾动作——它是一次实验真正变成他人能够信任、能够使用的东西的时刻。</p>
+
+        <h2>模型是协作者，不替代对结果的负责。</h2>
+        <p>我会借助模型探索方案、发现盲点，并更快把草图变成可运行的系统；但我仍希望自己理解系统的关键路径，能够有意识地修改它。对我而言，合适的分工不是“人负责想法，AI 负责执行”，而是一段持续的协作：我设定目标与边界，用真实情境检验结果，再决定哪些部分值得继续打磨。</p>
+
+        <h2>最好的反馈发生在使用之中。</h2>
+        <p>最近，我在做一些帮助同事更顺畅完成日常工作的工具。看到自己开发的东西进入他人的工作习惯，是一种安静却很具体的幸福。他们遇到的问题会提醒我哪些地方考虑得还不够；下一次迭代，则让工具再多一点体贴。发现问题、做出回应、再从使用中学习——这个循环，也是我持续做产品的原因。</p>
+      </div>
+    </article>
   </section>
 </BaseLayout>
 
 <style>
-  .page-width { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }.notes { min-height: calc(100vh - 178px); padding: clamp(5rem, 12vw, 10rem) 0; }.eyebrow { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }h1 { margin: 2.5rem 0; font-size: clamp(3.8rem, 8vw, 8rem); font-weight: 560; line-height: .9; letter-spacing: -.07em; }.lead { max-width: 560px; font-size: clamp(1.2rem, 2.3vw, 1.85rem); line-height: 1.3; letter-spacing: -.03em; }.empty-state { max-width: 510px; margin-top: 6rem; padding: 2rem 0; border-top: 1px solid var(--line); }.empty-state > span { display: inline-block; margin-bottom: .8rem; color: var(--violet); font-size: 2.1rem; }.empty-state p { margin: .15rem 0; }.muted { color: var(--muted); }.empty-state a { display: inline-block; margin-top: 1.4rem; font-weight: 650; }:global(:root[data-locale='zh']) h1 { max-width: 13ch; font-size: clamp(2.8rem, 6.2vw, 5.25rem); line-height: 1.17; letter-spacing: -.045em; } @media (max-width: 560px) { .page-width { width: min(100% - 2rem, 1180px); } h1 { font-size: clamp(3.6rem, 17vw, 5.4rem); }:global(:root[data-locale='zh']) h1 { max-width: none; font-size: clamp(2.45rem, 10vw, 3.65rem); } }
+  .page-width { width: min(1180px, calc(100% - 3rem)); margin: 0 auto; }
+  .notes { padding: clamp(5rem, 12vw, 10rem) 0; }
+  .eyebrow, .meta { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
+  .note { max-width: 840px; }
+  .meta { margin-top: 2.5rem; }
+  h1 { max-width: 780px; margin: 1.5rem 0 2rem; font-size: clamp(3.8rem, 7vw, 7rem); font-weight: 560; line-height: .94; letter-spacing: -.065em; }
+  .lead { max-width: 620px; margin-bottom: 5rem; font-size: clamp(1.2rem, 2.3vw, 1.85rem); line-height: 1.32; letter-spacing: -.03em; }
+  .prose { max-width: 680px; }
+  .prose :global(p) { margin: 0 0 2rem; font-size: clamp(1.08rem, 1.6vw, 1.28rem); line-height: 1.65; }
+  .prose :global(h2) { margin: 4rem 0 1rem; font-size: clamp(2rem, 3.3vw, 3.2rem); line-height: 1; letter-spacing: -.05em; }
+  :global(:root[data-locale='zh']) h1 { max-width: 14ch; font-size: clamp(2.8rem, 5.8vw, 5.1rem); line-height: 1.17; letter-spacing: -.045em; }
+  :global(:root[data-locale='zh']) .prose :global(h2) { font-size: clamp(1.9rem, 3.2vw, 3rem); line-height: 1.22; letter-spacing: -.04em; }
+  @media (max-width: 560px) { .page-width { width: min(100% - 2rem, 1180px); } .lead { margin-bottom: 3.5rem; } h1 { font-size: clamp(3.15rem, 14vw, 4.8rem); } :global(:root[data-locale='zh']) h1 { max-width: none; font-size: clamp(2.45rem, 10vw, 3.65rem); } .prose :global(h2) { margin-top: 3rem; } }
 </style>
