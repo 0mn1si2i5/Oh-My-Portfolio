@@ -1,43 +1,143 @@
 ---
 import Localized from './Localized.astro';
+
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
-const screens = [
-  { file: '01-songs-home-light', caption: { en: 'Recent resolutions and a personal collection keep the next listening choice close.', zh: '近期识别记录和个人收藏便于继续收听。' } },
-  { file: '02-paste-netease-copy', caption: { en: 'A natural-language share message can be pasted as-is; the link does not need to arrive clean.', zh: '支持直接粘贴自然语言分享消息，无需预先整理链接。' } },
-  { file: '03-song-detail-creep-light', caption: { en: 'One canonical song view makes the available listening destinations legible.', zh: '统一的歌曲详情页展示可用的播放平台。' } },
-  { file: '04-song-detail-reset-dark', caption: { en: 'Artwork-led detail views hold up across light and dark appearances.', zh: '详情页适配浅色和深色外观。' } },
-  { file: '05-rooms-list', caption: { en: 'Rooms give recommendations a small, persistent social context.', zh: '房间为音乐推荐提供持续的讨论空间。' } },
-  { file: '06-room-chat-hero', caption: { en: 'Song cards, replies, and reactions remain together in the conversation.', zh: '歌曲卡片、回复和反应集中在同一讨论中。' } },
-  { file: '07-send-to-room-sheet', caption: { en: 'Sending a song is a direct continuation of resolving it.', zh: '歌曲识别完成后，可直接发送至房间。' } },
-  { file: '08-profile-settings', caption: { en: 'Profile, preferred platform, and appearance settings stay deliberately lightweight.', zh: '个人资料、偏好平台与外观设置保持简洁。' } },
+const paths = [
+  {
+    eyebrow: { en: '01 — Personal path', zh: '01 — 个人路径' },
+    title: { en: 'Keep a discovery moving.', zh: '让一次发现继续往下走。' },
+    summary: {
+      en: 'When a song comes from outside the app, the useful work is to make it understandable once, then leave it somewhere the listener can return to.',
+      zh: '当一首歌从 App 外面来到手里，重要的不是再复制一次链接，而是先把它认清，再给它留一个能回来的地方。',
+    },
+    steps: [
+      {
+        file: '01-personal-paste',
+        label: { en: 'Paste the share as received', zh: '原样粘贴分享内容' },
+        copy: {
+          en: 'A share can include a sentence, a title, and a short NetEase link. The input accepts the whole message rather than asking the sender to clean it up first.',
+          zh: '一条分享里可以同时有一句话、歌名和网易云短链。输入框接住完整消息，不要求对方先把它整理成一个干净链接。',
+        },
+      },
+      {
+        file: '02-personal-canonical-detail',
+        label: { en: 'Recognize one song, expose its destinations', zh: '认出同一首歌，再展示去向' },
+        copy: {
+          en: 'The resolved result becomes one song page. It preserves the NetEase source and makes the available platform buttons visible without claiming every destination is an exact match.',
+          zh: '解析结果收敛成同一张歌曲页：保留网易云来源，并把可用的平台按钮摆出来，但不把每个候选去向都说成完全一致。',
+        },
+      },
+      {
+        file: '03-personal-library',
+        label: { en: 'Leave a trace to return to', zh: '给下一次播放留条线索' },
+        copy: {
+          en: 'The newly resolved song remains in recent activity and can be saved to Favorites, so a casual recommendation does not disappear when the original chat closes.',
+          zh: '新解析出的歌会留在最近解析里，也可以加入“已收藏”。原来随手收到的一句推荐，不会随着聊天窗口关闭而消失。',
+        },
+      },
+    ],
+  },
+  {
+    eyebrow: { en: '02 — Room path', zh: '02 — 房间路径' },
+    title: { en: 'Let a recommendation become a conversation.', zh: '让一条推荐长成一段对话。' },
+    summary: {
+      en: 'In a listening room, the link belongs to the conversation. Resolving it there turns a raw URL into something everyone can recognize, answer, and react to together.',
+      zh: '在听歌房间里，链接本来就属于对话的一部分。直接在这里解析，能把一条原始 URL 变成所有人都认得、能回复、能反应的对象。',
+    },
+    steps: [
+      {
+        file: '04-room-paste-link',
+        label: { en: 'Paste in the room, not elsewhere', zh: '就在房间里粘贴，不必跳出去' },
+        copy: {
+          en: 'A listener switches the composer to link mode and pastes the same share text into Late Night Loop. The recommendation stays where the people are already talking.',
+          zh: '听众把输入框切到链接模式，在 Late Night Loop 里粘贴同一段分享内容。推荐留在大家原本正在聊天的地方。',
+        },
+      },
+      {
+        file: '05-room-resolved-card',
+        label: { en: 'Send a song card, not a raw URL', zh: '发出歌曲卡片，而不是一条裸链接' },
+        copy: {
+          en: 'After the live resolver identifies Creep, the room receives a structured song card with title, artist, artwork, and source platform instead of an opaque link.',
+          zh: '实时解析器识别出 Creep 之后，房间收到的是带歌名、歌手、封面和来源平台的歌曲卡片，而不是看不懂的 URL。',
+        },
+      },
+      {
+        file: '06-room-reply-reactions',
+        label: { en: 'Keep the response beside the song', zh: '把回应留在歌曲身边' },
+        copy: {
+          en: 'Song cards can be quoted; replies and emoji reactions remain attached to the recommendation, preserving the small social context that made the share meaningful.',
+          zh: '歌曲卡片可以被引用；回复和 emoji reaction 会留在推荐旁边，把“为什么要听这首歌”的小小语境也一起保留下来。',
+        },
+      },
+    ],
+  },
 ];
 ---
 
 <section class="side-b-gallery" aria-labelledby="side-b-gallery-title">
   <div class="gallery-intro">
     <p class="eyebrow"><Localized en="In practice" zh="实际体验" /></p>
-    <h2 id="side-b-gallery-title"><Localized en="From a shared link to a shared room." zh="从音乐链接到共同讨论。" /></h2>
+    <h2 id="side-b-gallery-title"><Localized en="Two ways a recommendation can travel." zh="一条推荐，可以走两条路。" /></h2>
   </div>
-  <div class="screens">
-    {screens.map((screen) => (
-      <figure class:list={{ featured: screen.file === '06-room-chat-hero' }}>
-        <img src={asset(`/media/side-b/${screen.file}.png`)} alt={screen.caption.en} data-alt-en={screen.caption.en} data-alt-zh={screen.caption.zh} loading="lazy" />
-        <figcaption><Localized {...screen.caption} /></figcaption>
-      </figure>
-    ))}
-  </div>
+
+  {paths.map((path) => (
+    <section class="journey-path">
+      <header class="path-intro">
+        <p class="eyebrow"><Localized {...path.eyebrow} /></p>
+        <h3><Localized {...path.title} /></h3>
+        <p><Localized {...path.summary} /></p>
+      </header>
+
+      <div class="journey-steps">
+        {path.steps.map((step, index) => (
+          <article class:list={['journey-step', { reversed: index % 2 === 1 }]}>
+            <div class="step-copy">
+              <p class="step-number">0{index + 1}</p>
+              <h4><Localized {...step.label} /></h4>
+              <p><Localized {...step.copy} /></p>
+            </div>
+            <figure>
+              <img
+                src={asset(`/media/side-b/${step.file}.webp`)}
+                alt={step.label.en}
+                data-alt-en={step.label.en}
+                data-alt-zh={step.label.zh}
+                loading="lazy"
+              />
+            </figure>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
 </section>
 
 <style>
   .side-b-gallery { margin: 5rem 0 5.5rem; padding-top: 5rem; border-top: 1px solid var(--line); }
-  .eyebrow { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
-  h2 { margin: 1.1rem 0 2.8rem; font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; letter-spacing: -.055em; }
-  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.2rem 1.35rem; }
-  figure { margin: 0; }
-  figure.featured { grid-column: 1 / -1; }
-  img { display: block; width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-  figcaption { margin-top: .8rem; color: var(--muted); font-size: .92rem; line-height: 1.45; }
-  @media (max-width: 560px) { .side-b-gallery { margin: 4rem 0; padding-top: 4rem; }.screens { grid-template-columns: 1fr; gap: 2.2rem; }.featured { grid-column: auto; } }
+  .eyebrow, .step-number { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
+  .gallery-intro h2 { margin: 1.1rem 0 4rem; font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; letter-spacing: -.055em; }
+  .journey-path + .journey-path { margin-top: 7rem; padding-top: 5rem; border-top: 1px solid var(--line); }
+  .path-intro { max-width: 650px; }
+  .path-intro h3 { margin: 1rem 0 1.1rem; font-size: clamp(1.85rem, 3vw, 2.8rem); line-height: 1.04; letter-spacing: -.055em; }
+  .path-intro > p:last-child, .step-copy > p:last-child { margin: 0; font-size: 1.02rem; line-height: 1.65; }
+  .journey-steps { margin-top: 3.4rem; display: grid; gap: 4.5rem; }
+  .journey-step { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 270px); gap: clamp(2rem, 8vw, 8rem); align-items: center; }
+  .journey-step.reversed { grid-template-columns: minmax(220px, 270px) minmax(0, 1fr); }
+  .journey-step.reversed .step-copy { order: 2; }
+  .journey-step.reversed figure { order: 1; }
+  .step-copy { max-width: 540px; }
+  .step-copy h4 { margin: .7rem 0 1rem; font-size: clamp(1.35rem, 2.3vw, 2rem); line-height: 1.08; letter-spacing: -.045em; }
+  figure { width: 100%; margin: 0; padding: 7px; background: #131316; border-radius: 30px; box-shadow: 0 17px 35px rgba(20, 20, 30, .16); }
+  img { display: block; width: 100%; border-radius: 24px; }
+  @media (max-width: 680px) {
+    .side-b-gallery { margin: 4rem 0; padding-top: 4rem; }
+    .gallery-intro h2 { margin-bottom: 3.2rem; }
+    .journey-path + .journey-path { margin-top: 5rem; padding-top: 4rem; }
+    .journey-steps { margin-top: 2.8rem; gap: 3.6rem; }
+    .journey-step, .journey-step.reversed { grid-template-columns: 1fr; gap: 1.8rem; }
+    .journey-step.reversed .step-copy, .journey-step.reversed figure { order: initial; }
+    figure { width: min(100%, 280px); }
+  }
 </style>

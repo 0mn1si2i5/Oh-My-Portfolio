@@ -23,9 +23,9 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
     </header>
     <section class="media-section page-width"><ProjectMedia project={project} /></section>
     {project.data.media.walkthrough && (
-      <section class:list={['walkthrough-section', 'page-width', { 'side-b-walkthrough': project.id === 'side-b' }]} aria-labelledby="walkthrough-title">
+      <section class="walkthrough-section page-width" aria-labelledby="walkthrough-title">
         <p class="eyebrow"><Localized en="Walkthrough" zh="演示视频" /></p>
-        <h2 id="walkthrough-title">{project.id === 'side-b' ? <Localized en="A short product preview." zh="产品演示。" /> : <Localized en="See the product in motion." zh="产品演示。" />}</h2>
+        <h2 id="walkthrough-title"><Localized en="See the product in motion." zh="产品演示。" /></h2>
         <video controls preload="metadata" poster={asset(project.data.media.walkthrough.poster ?? project.data.media.src ?? '')} aria-label={`${project.data.title.en} product walkthrough`}>
           <source src={asset(project.data.media.walkthrough.src)} type="video/mp4" />
           <Localized en="Your browser does not support embedded video." zh="你的浏览器不支持嵌入式视频。" /> <a href={asset(project.data.media.walkthrough.src)}><Localized en="Download the walkthrough" zh="下载演示视频" /></a>.
@@ -54,9 +54,6 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .walkthrough-section { padding: 6rem 0; border-top: 1px solid var(--line); }
   .walkthrough-section h2 { margin: 1.1rem 0 3rem; font-size: clamp(2.4rem, 5vw, 4.6rem); }
   .walkthrough-section video { display: block; width: 100%; border: 1px solid var(--line); border-radius: 18px; background: #111; }
-  .side-b-walkthrough { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, .38fr); column-gap: clamp(2rem, 7vw, 7rem); align-items: start; }
-  .side-b-walkthrough > p, .side-b-walkthrough > h2 { grid-column: 1; }
-  .side-b-walkthrough > video { grid-column: 2; grid-row: 1 / span 2; width: min(100%, 320px); margin-left: auto; aspect-ratio: 720 / 1566; object-fit: contain; }
   .project-body { display: grid; grid-template-columns: .45fr 1fr; gap: 4rem; padding: 6rem 0; border-top: 1px solid var(--line); }
   .body-label { color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
   .prose { max-width: 700px; }
@@ -78,8 +75,6 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
     .hero-grid, .project-body { grid-template-columns: 1fr; gap: 2.5rem; }
     .media-section { padding-bottom: 5rem; }
     .walkthrough-section, .project-body, .explore-section { padding: 4rem 0; }
-    .side-b-walkthrough { grid-template-columns: 1fr; }
-    .side-b-walkthrough > video { grid-column: 1; grid-row: auto; width: min(100%, 320px); margin: 1.5rem 0 0; }
   }
   @media (max-width: 560px) {
     .page-width { width: min(100% - 2rem, 1180px); }
