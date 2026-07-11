@@ -35,6 +35,11 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </div>
   </section>
 
+  <section class="other-section page-width" aria-labelledby="other-title">
+    <p class="eyebrow">Other work</p>
+    <div class="other-grid"><h2 id="other-title">Small things<br />with a longer life.</h2><article class="other-card"><p class="meta"><span>May 2022</span><span>Community mod</span></p><h3>RSZ Namelist</h3><p>A Chinese naming enhancement mod for <em>Stellaris</em>, made to let a universe feel more at home in Chinese.</p><p class="outcome">5,000+ active users</p><a href={site.links.rsz} target="_blank" rel="noreferrer">Visit Steam Workshop <span aria-hidden="true">↗</span></a></article></div>
+  </section>
+
   <section id="about" class="about-section page-width" aria-labelledby="about-title">
     <div><p class="eyebrow">About</p><h2 id="about-title">A practice of<br />making things clear.</h2></div>
     <div class="about-copy">
@@ -42,11 +47,6 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <p>I like starting with what feels slightly inconvenient or overlooked: a conversation that is hard to return to, a music link that loses its meaning, a small world that needs better names. Then I try to make the next interaction feel obvious.</p>
       <a class="quiet-link" href={site.github} target="_blank" rel="noreferrer">Find more on GitHub <span aria-hidden="true">↗</span></a>
     </div>
-  </section>
-
-  <section class="other-section page-width" aria-labelledby="other-title">
-    <p class="eyebrow">Other work</p>
-    <div class="other-grid"><h2 id="other-title">Small things<br />with a longer life.</h2><article class="other-card"><p class="meta"><span>May 2022</span><span>Community mod</span></p><h3>RSZ Namelist</h3><p>A Chinese naming enhancement mod for <em>Stellaris</em>, made to let a universe feel more at home in Chinese.</p><p class="outcome">5,000+ active users</p><a href={site.links.rsz} target="_blank" rel="noreferrer">Visit Steam Workshop <span aria-hidden="true">↗</span></a></article></div>
   </section>
 </BaseLayout>
 
