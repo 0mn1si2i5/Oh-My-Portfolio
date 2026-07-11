@@ -1,14 +1,16 @@
 ---
 title: Side B
 year: '2026'
-status: iOS prototype
+status: Working iOS prototype
 order: 2
-summary: An experiment in making shared music links feel useful across platform boundaries.
-role: Product concept, information architecture, interaction design, and iOS prototyping
+summary: A cross-platform music-sharing prototype that resolves a song once, then makes it easy to save, route, and discuss together.
+role: Product concept, interaction design, SwiftUI, and service prototyping
 accent: coral
 media:
-  type: placeholder
-  alt: Placeholder for a Side B prototype recording or screenshots.
+  type: video
+  src: /media/side-b-preview.mp4
+  poster: /media/side-b-hero.png
+  alt: Side B iOS screens showing music resolution, song details, and a shared listening room.
 links:
   - label: View on GitHub
     href: https://github.com/0mn1si2i5/Side-B
@@ -16,16 +18,18 @@ links:
 
 ## What I noticed
 
-Sharing a song should be a small social gesture. Instead, the link often sends the recipient to the wrong platform, hides useful context, or makes the music impossible to reach.
+Sharing a song should be a small social gesture. Instead, the link can send the recipient to the wrong platform, strip away useful context, or turn a recommendation into a dead end.
 
 ## What I explored
 
-Side B asks what a platform-agnostic music-sharing experience could feel like: a single link that first understands the song, then presents a useful, human-scale way to continue listening.
+I explored what a platform-agnostic sharing experience could feel like: a link that first understands the song, then preserves the momentum of the recommendation across different listening habits.
 
 ## What I made
 
-I defined the core “parse — gather — share” flow, shaped the information architecture, and built a local iOS prototype in SwiftUI. The prototype is designed around the moments before and after a link is opened, with backend-service and music-platform integration considered as part of the product system.
+I designed and built the core “parse — gather — share” flow as a SwiftUI iOS prototype with a FastAPI service behind it. The system resolves Spotify, Apple Music, NetEase Cloud Music, and QQ Music inputs into a canonical song object, then supports local saving, platform routing, and room-based discussion with persisted messages and live updates.
+
+The screens shown here use real resolver output with a curated local listening room: a song detail view makes the available destinations legible, while the room keeps the song card, reply, and reactions in the same social context.
 
 ## What I learned
 
-The project is intentionally still a prototype. It is a place to test whether better link handling can make a familiar act of sharing feel more connected, rather than merely more compatible.
+The project remains a prototype, but building the working path made the cost of a wrong match concrete. A platform button only feels useful when the system can earn the user's trust in the song it points to. That became the guiding constraint: show real destinations when they exist, and keep uncertainty visible instead of presenting a guess as a success.
