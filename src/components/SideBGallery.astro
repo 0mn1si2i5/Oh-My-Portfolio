@@ -1,0 +1,42 @@
+---
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
+const screens = [
+  { file: '01-songs-home-light', caption: 'Recent resolutions and a personal collection keep the next listening choice close.' },
+  { file: '02-paste-netease-copy', caption: 'A natural-language share message can be pasted as-is; the link does not need to arrive clean.' },
+  { file: '03-song-detail-creep-light', caption: 'One canonical song view makes the available listening destinations legible.' },
+  { file: '04-song-detail-reset-dark', caption: 'Artwork-led detail views hold up across light and dark appearances.' },
+  { file: '05-rooms-list', caption: 'Rooms give recommendations a small, persistent social context.' },
+  { file: '06-room-chat-hero', caption: 'Song cards, replies, and reactions remain together in the conversation.' },
+  { file: '07-send-to-room-sheet', caption: 'Sending a song is a direct continuation of resolving it.' },
+  { file: '08-profile-settings', caption: 'Profile, preferred platform, and appearance settings stay deliberately lightweight.' },
+];
+---
+
+<section class="side-b-gallery" aria-labelledby="side-b-gallery-title">
+  <div class="gallery-intro">
+    <p class="eyebrow">In practice</p>
+    <h2 id="side-b-gallery-title">From a shared link to a shared room.</h2>
+  </div>
+  <div class="screens">
+    {screens.map((screen) => (
+      <figure class:list={{ featured: screen.file === '06-room-chat-hero' }}>
+        <img src={asset(`/media/side-b/${screen.file}.png`)} alt={screen.caption} loading="lazy" />
+        <figcaption>{screen.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style>
+  .side-b-gallery { margin: 5rem 0 5.5rem; padding-top: 5rem; border-top: 1px solid var(--line); }
+  .eyebrow { margin: 0; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .075em; text-transform: uppercase; }
+  h2 { margin: 1.1rem 0 2.8rem; font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; letter-spacing: -.055em; }
+  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.2rem 1.35rem; }
+  figure { margin: 0; }
+  figure.featured { grid-column: 1 / -1; }
+  img { display: block; width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+  figcaption { margin-top: .8rem; color: var(--muted); font-size: .92rem; line-height: 1.45; }
+  @media (max-width: 560px) { .side-b-gallery { margin: 4rem 0; padding-top: 4rem; }.screens { grid-template-columns: 1fr; gap: 2.2rem; }.featured { grid-column: auto; } }
+</style>
