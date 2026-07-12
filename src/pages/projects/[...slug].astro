@@ -59,6 +59,9 @@ const asset = (path: string) => `${base}${path.replace(/^\//, '')}`;
   .prose { max-width: 700px; }
   .prose :global(h2) { margin: 0 0 1rem; font-size: clamp(2rem, 3.5vw, 3.3rem); line-height: 1; }
   .prose :global(p) { margin: 0 0 3.3rem; font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.55; }
+  .prose :global(figure) { margin: -.8rem 0 3.3rem; }
+  .prose :global(figure img) { display: block; width: 100%; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+  .prose :global(figcaption) { margin-top: .8rem; color: var(--muted); font-size: .92rem; line-height: 1.45; }
   .prose :global(a) { color: var(--accent); }
   .explore-section { padding: 6rem 0 8rem; border-top: 1px solid var(--line); }
   .explore-section h2 { margin-top: 1.1rem; font-size: clamp(2.4rem, 5vw, 4.6rem); }
